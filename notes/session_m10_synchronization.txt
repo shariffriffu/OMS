@@ -1,0 +1,37 @@
+﻿===========================================
+SESSION M10: SYNCHRONIZATION & LOCKS
+===========================================
+🎯 OBJECTIVE: Protect shared state from race conditions when 
+multiple threads access the same object.
+
+🔑 KEY CONCEPTS:
+• Race Condition: When thread execution order causes data corruption 
+  (e.g., two threads reading the same balance before either writes).
+• synchronized keyword: Attaches a "Monitor Lock" to an object. 
+  Only ONE thread can execute a synchronized method/block on that 
+  object at a time. Other threads block and wait.
+• Performance Cost: Locking slows down execution. Use it ONLY 
+  around the critical section (the actual data modification).
+• ExecutorService.awaitTermination(): Crucial for waiting for 
+  background threads to finish before the main thread exits.
+
+💻 SYNTAX CHEAT SHEET:
+// Method-level lock (locks the entire object 'this')
+public synchronized void updateBalance(double amount) { ... }
+
+// Block-level lock (more efficient, locks only what's needed)
+public void process() {
+    // fast, thread-safe code here
+    synchronized(this) {
+        // critical section: modify shared state here
+    }
+    // fast, thread-safe code here
+}
+
+⚠️ COMMON MISTAKES:
+• Forgetting awaitTermination() (main thread exits before workers finish).
+• Over-synchronizing (locking too much code, causing performance bottlenecks).
+• Deadlocks (Thread A waits for Thread B's lock, while Thread B waits for Thread A's lock).
+
+🔜 NEXT: SESSION M11 - COMPLETABLEFUTURE (MODERN ASYNC)
+===========================================

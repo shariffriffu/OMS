@@ -1,0 +1,35 @@
+===========================================
+SESSION 6: OOP - CLASSES & OBJECTS
+===========================================
+🎯 OBJECTIVE: Understand the difference between a Class (blueprint) 
+and an Object (the actual instance), and how to create them.
+
+🔑 KEY CONCEPTS:
+• Class: A blueprint or template (e.g., Customer).
+• Object: A specific instance created from the blueprint (e.g., customer1).
+• 'new' keyword: Allocates memory and creates the object.
+• Dot (.) operator: Used to access fields or methods of an object.
+• Rule: A file can only have ONE 'public' class, and the filename 
+  MUST match it exactly.
+
+💻 SYNTAX CHEAT SHEET:
+class Product {
+    String name;
+    double price;
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Product myLaptop = new Product(); // Instantiation
+        myLaptop.name = "MacBook";        // Access field
+        myLaptop.price = 1200.0;
+    }
+}
+
+⚠️ COMMON MISTAKES:
+• Forgetting the 'new' keyword (results in NullPointerException).
+• Naming the file differently than the 'public class'.
+• Trying to access object fields from a 'static' context without an object.
+
+🔜 NEXT: SESSION 7 - OOP: ENCAPSULATION
+===========================================

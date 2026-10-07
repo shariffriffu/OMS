@@ -1,0 +1,29 @@
+===========================================
+SESSION 9: OOP - INTERFACES & ABSTRACTION
+===========================================
+🎯 OBJECTIVE: Define strict "contracts" for classes to ensure 
+interchangeable components (e.g., swapping Payment Providers).
+
+🔑 KEY CONCEPTS:
+• Interface: A pure contract. Contains method signatures, NO implementation.
+• 'implements': Keyword used by a class to fulfill an interface contract.
+• Multiple Implementation: A class can implement MULTIPLE interfaces.
+• Programming to an Interface: Declare variables as the Interface type, 
+  but instantiate them with the concrete Class. This allows easy swapping.
+
+💻 SYNTAX CHEAT SHEET:
+interface Processor { void process(); }
+class Stripe implements Processor { 
+    @Override public void process() { ... } 
+}
+
+// Usage:
+Processor p = new Stripe();
+p.process();
+
+⚠️ COMMON MISTAKES:
+• Forgetting '@Override' (compiler won't catch typos in method names).
+• Trying to put regular variables/fields inside an interface.
+
+🔜 NEXT: SESSION 10 - COLLECTIONS FRAMEWORK
+===========================================

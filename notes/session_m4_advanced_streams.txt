@@ -1,0 +1,32 @@
+===========================================
+SESSION M4: ADVANCED STREAMS (GROUPING & REDUCING)
+===========================================
+🎯 OBJECTIVE: Perform complex data aggregation and analytics 
+using declarative stream operations.
+
+🔑 KEY CONCEPTS:
+• Collectors.groupingBy(classifier, downstream): Groups elements 
+  into a Map. The downstream collector defines what happens to 
+  the grouped elements (e.g., counting, summing, listing).
+• mapToDouble() / mapToInt(): Specialized streams for primitives 
+  to avoid boxing/unboxing overhead.
+• .sum() / .average() / .reduce(): Terminal operations for 
+  aggregating numeric streams into a single value.
+
+💻 SYNTAX CHEAT SHEET:
+// Group and Count
+Map<String, Long> counts = list.stream()
+    .collect(Collectors.groupingBy(Item::getCategory, Collectors.counting()));
+
+// Filter and Sum
+double total = list.stream()
+    .filter(Item::isActive)
+    .mapToDouble(Item::getPrice)
+    .sum();
+
+⚠️ COMMON MISTAKES:
+• Forgetting that groupingBy returns a Map, not a List.
+• Using .map() instead of .mapToDouble() before .sum() (causes compilation errors).
+
+🔜 NEXT: SESSION M5 - RECORDS (JAVA 14+)
+===========================================

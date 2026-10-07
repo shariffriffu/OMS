@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shariff's OMS + WSO2 Learning Journey</title>
+    <style>
+        :root { --bg-color: #0f172a; --card-bg: #1e293b; --text-primary: #f1f5f9; --text-secondary: #94a3b8; --accent: #3b82f6; --success: #22c55e; --pending: #475569; --wso2-color: #ff6b00; --mastery-color: #a855f7; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: var(--bg-color); color: var(--text-primary); margin: 0; padding: 20px; line-height: 1.6; }
+        .container { max-width: 900px; margin: 0 auto; }
+        header { text-align: center; margin-bottom: 30px; padding-bottom: 20px; border-bottom: 1px solid var(--card-bg); }
+        h1 { margin: 0; color: var(--accent); }
+        .subtitle { color: var(--text-secondary); font-size: 0.9em; margin-top: 5px; }
+        .progress-container { background-color: var(--card-bg); border-radius: 10px; padding: 20px; margin-bottom: 30px; }
+        .progress-bar-bg { background-color: var(--pending); border-radius: 5px; height: 24px; width: 100%; overflow: hidden; }
+        .progress-bar-fill { background-color: var(--success); height: 100%; width: 0%; transition: width 0.5s ease; display: flex; align-items: center; justify-content: center; font-size: 0.8em; font-weight: bold; color: white; }
+        .progress-text { text-align: right; font-size: 0.85em; color: var(--text-secondary); margin-top: 8px; }
+        .phase { background-color: var(--card-bg); border-radius: 8px; padding: 20px; margin-bottom: 20px; border-left: 5px solid var(--accent); }
+        .phase.mastery { border-left-color: var(--mastery-color); }
+        .phase.wso2 { border-left-color: var(--wso2-color); }
+        .phase-title { font-size: 1.2em; font-weight: bold; margin-bottom: 15px; color: var(--text-primary); display: flex; align-items: center; gap: 10px; }
+        .session { display: flex; align-items: flex-start; padding: 10px 0; border-bottom: 1px solid #334155; }
+        .session:last-child { border-bottom: none; }
+        .status { width: 22px; height: 22px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-right: 15px; font-size: 12px; flex-shrink: 0; margin-top: 3px; }
+        .status.done { background-color: var(--success); color: white; }
+        .status.pending { background-color: transparent; border: 2px solid var(--pending); }
+        .session-content { flex: 1; }
+        .session-name { color: var(--text-primary); font-weight: 500; }
+        .session-desc { color: var(--text-secondary); font-size: 0.85em; margin-top: 2px; }
+        .session.pending .session-name { color: var(--text-secondary); }
+        .tag { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 0.75em; font-weight: bold; margin-left: 8px; }
+        .tag-java { background-color: #b07219; color: white; }
+        .tag-db { background-color: #336791; color: white; }
+        .tag-spring { background-color: #6db33f; color: white; }
+        .tag-wso2 { background-color: var(--wso2-color); color: white; }
+        .tag-mastery { background-color: var(--mastery-color); color: white; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🚀 Enterprise OMS + WSO2 Learning Journey</h1>
+            <div class="subtitle">Master Blueprint & Learning Tracker | Student: Shariff</div>
+        </header>
+        <div class="progress-container">
+            <div class="progress-bar-bg"><div class="progress-bar-fill" id="progressBar">0%</div></div>
+            <div class="progress-text" id="progressText">Calculating...</div>
+        </div>
+
+        <!-- Phase 1 -->
+        <div class="phase">
+            <div class="phase-title">Phase 1: Java Fundamentals (C ➔ Java Bridge) <span class="tag tag-java">JAVA</span> ✅ COMPLETE</div>
+            <div class="session"><div class="status done">✓</div><div class="session-content"><div class="session-name">1-11. Java Syntax & OOP</div><div class="session-desc">Variables, Methods, Encapsulation, Inheritance, Collections, Exceptions</div></div></div>
+        </div>
+
+        <!-- Phase 1.5: NEW MASTERY PHASE -->
+        <div class="phase mastery">
+            <div class="phase-title">Phase 1.5: Advanced Java Mastery (Senior Level) <span class="tag tag-mastery">MASTERY</span></div>
+            <div class="session done"><div class="status done">✓</div><div class="session-content"><div class="session-name">M1. Lambdas & Functional Interfaces</div><div class="session-desc">Modern Java syntax, @FunctionalInterface, Comparator</div></div></div>
+            <div class="session done"><div class="status done">✓</div><div class="session-content"><div class="session-name">M2. The Optional Class</div><div class="session-desc">Eliminating NullPointerExceptions elegantly</div></div></div>
+            <div class="session done"><div class="status done">✓</div><div class="session-content"><div class="session-name">M3. Streams API Basics</div><div class="session-desc">filter, map, collect - replacing for-loops</div></div></div>
+            <div class="session done"><div class="status done">✓</div><div class="session-content"><div class="session-name">M4. Advanced Streams</div><div class="session-desc">flatMap, reduce, groupingBy</div></div></div>
+            <div class="session done"><div class="status done">✓</div><div class="session-content"><div class="session-name">M5. Records (Java 14+)</div><div class="session-desc">Immutable data carriers, replacing boilerplate DTOs</div></div></div>
+            <div class="session done"><div class="status done">✓</div><div class="session-content"><div class="session-name">M6. HashMap Internals</div><div class="session-desc">Hashing, buckets, collisions, equals() & hashCode()</div></div></div>
+            <div class="session done"><div class="status done">✓</div><div class="session-content"><div class="session-name">M7. Concurrent Collections</div><div class="session-desc">ConcurrentHashMap, thread-safe lists</div></div></div>
+            <div class="session done"><div class="status done">✓</div><div class="session-content"><div class="session-name">M8. Threads & Runnables</div><div class="session-desc">Creating and starting threads</div></div></div>
+            <div class="session done"><div class="status done">✓</div><div class="session-content"><div class="session-name">M9. ExecutorService & Thread Pools</div><div class="session-desc">Managing background tasks professionally</div></div></div>
+            <div class="session done"><div class="status done">✓</div><div class="session-content"><div class="session-name">M10. Synchronization & Locks</div><div class="session-desc">Preventing race conditions and data corruption</div></div></div>
+            <div class="session pending"><div class="status pending"></div><div class="session-content"><div class="session-name">M11. CompletableFuture</div><div class="session-desc">Modern asynchronous programming</div></div></div>
+            <div class="session pending"><div class="status pending"></div><div class="session-content"><div class="session-name">M12. Stack vs. Heap Memory</div><div class="session-desc">How Java actually stores variables and objects</div></div></div>
+            <div class="session pending"><div class="status pending"></div><div class="session-content"><div class="session-name">M13. Garbage Collection Basics</div><div class="session-desc">How Java cleans memory, avoiding memory leaks</div></div></div>
+            <div class="session pending"><div class="status pending"></div><div class="session-content"><div class="session-name">M14. Immutability</div><div class="session-desc">Why unchangeable objects make code safer</div></div></div>
+            <div class="session pending"><div class="status pending"></div><div class="session-content"><div class="session-name">M15. Singleton & Factory Patterns</div><div class="session-desc">Object creation and management patterns</div></div></div>
+            <div class="session pending"><div class="status pending"></div><div class="session-content"><div class="session-name">M16. Builder Pattern</div><div class="session-desc">Creating complex objects cleanly</div></div></div>
+            <div class="session pending"><div class="status pending"></div><div class="session-content"><div class="session-name">M17. Strategy Pattern</div><div class="session-desc">Swapping algorithms at runtime</div></div></div>
+            <div class="session pending"><div class="status pending"></div><div class="session-content"><div class="session-name">M18. JUnit 5 Testing</div><div class="session-desc">Writing automated tests for logic</div></div></div>
+            <div class="session pending"><div class="status pending"></div><div class="session-content"><div class="session-name">M19. Mockito</div><div class="session-desc">Faking dependencies for isolated testing</div></div></div>
+        </div>
+
+        <!-- Phase 2 -->
+        <div class="phase">
+            <div class="phase-title">Phase 2: Database & SQL Foundation <span class="tag tag-db">POSTGRESQL</span> ✅ COMPLETE</div>
+            <div class="session"><div class="status done">✓</div><div class="session-content"><div class="session-name">12-15. SQL & JDBC</div><div class="session-desc">Schema Design, JOINs, Foreign Keys, JDBC Connection & ResultSet</div></div></div>
+        </div>
+
+        <!-- Phase 3 -->
+        <div class="phase">
+            <div class="phase-title">Phase 3: Spring Boot Core Architecture <span class="tag tag-spring">SPRING</span> ✅ COMPLETE</div>
+            <div class="session"><div class="status done">✓</div><div class="session-content"><div class="session-name">16. Spring Boot Initialization</div><div class="session-desc">Spring Initializr, pom.xml, application.properties, Tomcat startup</div></div></div>
+            <div class="session"><div class="status done">✓</div><div class="session-content"><div class="session-name">17. REST API Fundamentals</div><div class="session-desc">@RestController, @GetMapping, HTTP responses</div></div></div>
+            <div class="session"><div class="status done">✓</div><div class="session-content"><div class="session-name">18. The Service Layer</div><div class="session-desc">@Service, business logic separation, Dependency Injection (@Autowired)</div></div></div>
+            <div class="session"><div class="status done">✓</div><div class="session-content"><div class="session-name">19. DTO Pattern (Data Transfer Objects)</div><div class="session-desc">Why we don't expose Entities directly, mapping</div></div></div>
+            <div class="session"><div class="status done">✓</div><div class="session-content"><div class="session-name">20. Global Exception Handling</div><div class="session-desc">@RestControllerAdvice, @ExceptionHandler, standardized error responses</div></div></div>
+        </div>
+
+        <!-- Phase 4 -->
+        <div class="phase"><div class="phase-title">Phase 4: Building the OMS Core Modules <span class="tag tag-spring">SPRING JPA</span></div>
+            <div class="session pending"><div class="status pending"></div><div class="session-content"><div class="session-name">21. Spring Data JPA Setup</div><div class="session-desc">@Entity, @Table, @Id, @GeneratedValue, JpaRepository</div></div></div>
+            <div class="session pending"><div class="status pending"></div><div class="session-content"><div class="session-name">22. OMS Module: Customer Management</div><div class="session-desc">Full CRUD: Entity, Repo, Service, Controller, API Test</div></div></div>
+            <div class="session pending"><div class="status pending"></div><div class="session-content"><div class="session-name">23. OMS Module: Product & Category</div><div class="session-desc">One-to-Many relationships, pagination, sorting</div></div></div>
+            <div class="session pending"><div class="status pending"></div><div class="session-content"><div class="session-name">24. OMS Module: Inventory Management</div><div class="session-desc">Stock tracking, concurrency basics</div></div></div>
+            <div class="session pending"><div class="status pending"></div><div class="session-content"><div class="session-name">25. OMS Module: Order Creation Flow</div><div class="session-desc">@Transactional, creating Order + OrderItems atomically</div></div></div>
+        </div>
+
+        <!-- Phase 5 -->
+        <div class="phase"><div class="phase-title">Phase 5: Security & Authentication <span class="tag tag-spring">SECURITY</span></div>
+            <div class="session pending"><div class="status pending"></div><div class="session-content"><div class="session-name">26. Security Concepts</div><div class="session-desc">Authentication vs Authorization, Sessions vs Tokens</div></div></div>
+            <div class="session pending"><div class="status pending"></div><div class="session-content"><div class="session-name">27. Spring Security Setup</div><div class="session-desc">SecurityFilterChain, disabling defaults for API</div></div></div>
+            <div class="session pending"><div class="status pending"></div><div class="session-content"><div class="session-name">28. JWT Implementation</div><div class="session-desc">Generating tokens, validating tokens, JwtFilter</div></div></div>
+            <div class="session pending"><div class="status pending"></div><div class="session-content"><div class="session-name">29. Role-Based Access Control (RBAC)</div><div class="session-desc">@PreAuthorize, ADMIN vs USER endpoints</div></div></div>
+        </div>
+
+        <!-- Phase 6 -->
+        <div class="phase wso2"><div class="phase-title">Phase 6: WSO2 API Manager Integration <span class="tag tag-wso2">WSO2</span></div>
+            <div class="session pending"><div class="status pending"></div><div class="session-content"><div class="session-name">30. WSO2 Architecture Overview</div><div class="session-desc">Publisher, Dev Portal, Gateway, Key Manager</div></div></div>
+            <div class="session pending"><div class="status pending"></div><div class="session-content"><div class="session-name">31. WSO2 Setup & Hello World</div><div class="session-desc">Running WSO2 APIM, accessing management consoles</div></div></div>
+            <div class="session pending"><div class="status pending"></div><div class="session-content"><div class="session-name">32. Publishing OMS APIs to WSO2</div><div class="session-desc">Importing OpenAPI/Swagger, creating an API in Publisher</div></div></div>
+            <div class="session pending"><div class="status pending"></div><div class="session-content"><div class="session-name">33. API Lifecycle & Dev Portal</div><div class="session-desc">Publishing, subscribing, generating application keys</div></div></div>
+            <div class="session pending"><div class="status pending"></div><div class="session-content"><div class="session-name">34. WSO2 Security Policies</div><div class="session-desc">CORS configuration, Throttling (Rate Limiting)</div></div></div>
+            <div class="session pending"><div class="status pending"></div><div class="session-content"><div class="session-name">35. OAuth2 with WSO2</div><div class="session-desc">Replacing local JWT with WSO2 Key Manager validation</div></div></div>
+        </div>
+
+        <!-- Phase 7 -->
+        <div class="phase wso2"><div class="phase-title">Phase 7: WSO2 Micro Integrator (Mediation) <span class="tag tag-wso2">WSO2 MI</span></div>
+            <div class="session pending"><div class="status pending"></div><div class="session-content"><div class="session-name">36. Micro Integrator Concepts</div><div class="session-desc">ESB patterns, proxy services, endpoints</div></div></div>
+            <div class="session pending"><div class="status pending"></div><div class="session-content"><div class="session-name">37. Payload Transformation</div><div class="session-desc">Transforming OMS JSON to external vendor XML/JSON</div></div></div>
+            <div class="session pending"><div class="status pending"></div><div class="session-content"><div class="session-name">38. Mock External Integration</div><div class="session-desc">Routing Order Created event to a mock Payment/Shipping API</div></div></div>
+        </div>
+
+        <!-- Phase 8 -->
+        <div class="phase"><div class="phase-title">Phase 8: Professional Practices & Deployment <span class="tag tag-java">DEVOPS</span></div>
+            <div class="session pending"><div class="status pending"></div><div class="session-content"><div class="session-name">39. Logging & Auditing</div><div class="session-desc">SLF4J, Logback, tracking who changed what</div></div></div>
+            <div class="session pending"><div class="status pending"></div><div class="session-content"><div class="session-name">40. Docker Basics</div><div class="session-desc">Containerizing the Spring Boot OMS app</div></div></div>
+            <div class="session pending"><div class="status pending"></div><div class="session-content"><div class="session-name">41. Docker Compose Stack</div><div class="session-desc">Running PostgreSQL + Spring Boot together via docker-compose</div></div></div>
+            <div class="session pending"><div class="status pending"></div><div class="session-content"><div class="session-name">42. Final Architecture Review</div><div class="session-desc">You explaining the full flow: Browser ➔ WSO2 ➔ Spring Boot ➔ DB</div></div></div>
+        </div>
+    </div>
+    <script>
+        const totalSessions = document.querySelectorAll('.session').length;
+        const doneSessions = document.querySelectorAll('.status.done').length;
+        const percentage = Math.round((doneSessions / totalSessions) * 100);
+        const bar = document.getElementById('progressBar');
+        bar.style.width = percentage + '%';
+        bar.innerText = percentage + '%';
+        document.getElementById('progressText').innerText = 'Completed: ' + doneSessions + ' / ' + totalSessions + ' Milestones';
+    </script>
+</body>
+</html>

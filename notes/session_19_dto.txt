@@ -1,0 +1,27 @@
+===========================================
+SESSION 19: DTO PATTERN (DATA TRANSFER OBJECTS)
+===========================================
+ OBJECTIVE: Separate database structure from API responses for 
+security and flexibility.
+
+🔑 KEY CONCEPTS:
+• Entity: Represents the database table (contains sensitive data).
+• DTO: Represents the API response (contains only what the client needs).
+• Jackson: Spring Boot's built-in tool that automatically converts Java 
+  Objects/DTOs into JSON text for the browser.
+• Decoupling: Changing DB column names doesn't break the frontend API.
+
+💻 SYNTAX CHEAT SHEET:
+public class MyDTO {
+    private String safeField;
+    // Constructor + Getters
+}
+
+// In Service:
+public MyDTO getData() {
+    Entity dbData = repo.findById();
+    return new MyDTO(dbData.getSafeField()); // Map safely!
+}
+
+🔜 NEXT: SESSION 20 - GLOBAL EXCEPTION HANDLING
+===========================================

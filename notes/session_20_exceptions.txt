@@ -1,0 +1,27 @@
+===========================================
+SESSION 20: GLOBAL EXCEPTION HANDLING
+===========================================
+🎯 OBJECTIVE: Catch errors globally and return clean, standardized 
+JSON error responses instead of crashing.
+
+🔑 KEY CONCEPTS:
+• @RestControllerAdvice: A global "net" that catches exceptions across all controllers.
+• @ExceptionHandler: Specifies which exact exception class this method should catch.
+• @ResponseStatus: Forces the HTTP response to have a specific status code (e.g., 404).
+• Custom Exceptions: Creating your own exception classes (extending RuntimeException) 
+  makes your code readable and specific.
+
+💻 SYNTAX CHEAT SHEET:
+@RestControllerAdvice
+public class GlobalExceptionHandler {
+    @ExceptionHandler(ResourceNotFoundException.class)
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    public Map<String, Object> handleNotFound(ResourceNotFoundException ex) {
+        Map<String, Object> error = new HashMap<>();
+        error.put("error", ex.getMessage());
+        return error;
+    }
+}
+
+🔜 NEXT: PHASE 4 - BUILDING THE OMS CORE MODULES
+===========================================

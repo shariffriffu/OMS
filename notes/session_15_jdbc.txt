@@ -1,0 +1,26 @@
+===========================================
+SESSION 15: JDBC (JAVA DATABASE CONNECTIVITY)
+===========================================
+🎯 OBJECTIVE: Connect Java applications to a PostgreSQL database 
+using the official JDBC Driver.
+
+🔑 KEY CONCEPTS:
+• JDBC Driver: The "translator" (.jar file) that lets Java speak SQL.
+• Connection: The active link between Java and the database.
+• URL Format: jdbc:postgresql://localhost:5432/database_name
+• Classpath (-cp): Required flag to tell Java where the .jar file is.
+• SQLException: The specific exception thrown when database operations fail.
+
+💻 SYNTAX CHEAT SHEET:
+String url = "jdbc:postgresql://localhost:5432/oms_database";
+Connection conn = DriverManager.getConnection(url, "postgres", "password");
+// ... do database work ...
+conn.close(); // Always close the connection!
+
+⚠️ COMMON MISTAKES:
+• Forgetting the `-cp` flag when compiling/running.
+• Using `javac` instead of `java` to run the program.
+• Hardcoding passwords (we will fix this properly in Spring Boot!).
+
+🔜 NEXT: SESSION 15 (Part 2) - JDBC CRUD OPERATIONS
+===========================================

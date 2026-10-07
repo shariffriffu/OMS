@@ -1,0 +1,31 @@
+﻿===========================================
+SESSION M8/M9: THREAD POOLS & EXECUTORSERVICE
+===========================================
+🎯 OBJECTIVE: Manage background tasks efficiently and safely 
+without crashing the server with too many threads.
+
+🔑 KEY CONCEPTS:
+• new Thread() is dangerous: Creating thousands of threads consumes 
+  massive memory and can crash the JVM (Denial of Service).
+• ExecutorService: An enterprise-grade thread pool that reuses a 
+  fixed number of threads to execute tasks from a queue.
+• shutdown(): Tells the pool to stop accepting new tasks.
+• awaitTermination(): Blocks the main thread until all submitted 
+  tasks have finished executing.
+
+💻 SYNTAX CHEAT SHEET:
+ExecutorService executor = Executors.newFixedThreadPool(5);
+
+executor.submit(() -> {
+    // Task logic here
+});
+
+executor.shutdown();
+executor.awaitTermination(5, TimeUnit.SECONDS);
+
+⚠️ COMMON MISTAKES:
+• Forgetting to call shutdown() (causes the application to hang on exit).
+• Case-sensitivity bugs in Map keys (computeIfPresent silently ignores missing keys).
+
+🔜 NEXT: SESSION M10 - SYNCHRONIZATION & LOCKS
+===========================================

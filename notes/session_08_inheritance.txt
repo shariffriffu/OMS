@@ -1,0 +1,30 @@
+===========================================
+SESSION 8: OOP - INHERITANCE & POLYMORPHISM
+===========================================
+🎯 OBJECTIVE: Reuse code between similar classes (Inheritance) and 
+handle objects of different types seamlessly (Polymorphism).
+
+🔑 KEY CONCEPTS:
+• Inheritance ('extends'): Child class inherits fields/methods from Parent.
+• 'protected': Access modifier allowing child classes to see the field.
+• '@Override': Annotation proving you intentionally replaced a parent method.
+• Polymorphism: A Parent reference can hold a Child object. Java dynamically 
+  calls the Child's overridden method at runtime.
+• Type Casting: ((ChildType) parentRef) to access child-specific methods.
+
+💻 SYNTAX CHEAT SHEET:
+class Parent { protected String name; }
+class Child extends Parent { 
+    @Override public void display() { ... } 
+}
+
+// Polymorphism:
+Parent obj = new Child();
+obj.display(); // Runs Child's version!
+
+⚠️ COMMON MISTAKES:
+• Forgetting '@Override' (code works, but you lose compiler safety checks).
+• Trying to call a Child-specific method on a Parent reference without casting.
+
+🔜 NEXT: SESSION 9 - INTERFACES & ABSTRACTION
+===========================================

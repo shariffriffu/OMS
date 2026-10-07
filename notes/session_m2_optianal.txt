@@ -1,0 +1,29 @@
+===========================================
+SESSION M2: THE OPTIONAL CLASS
+===========================================
+🎯 OBJECTIVE: Eradicate NullPointerExceptions by forcing developers 
+to explicitly handle the "missing value" case.
+
+🔑 KEY CONCEPTS:
+• Optional<T>: A container that may or may not hold a non-null value.
+• Never return null from a method; return Optional.empty() instead.
+• .ifPresent(Consumer): Executes code ONLY if the value exists. 
+  The lambda receives the UNWRAPPED value.
+• .orElse(T): Returns the value if present, otherwise returns the default.
+• .orElseThrow(): Returns the value, or throws a custom exception if empty.
+
+💻 SYNTAX CHEAT SHEET:
+public Optional<String> findEmail(String user) {
+    return database.has(user) ? Optional.of("a@b.com") : Optional.empty();
+}
+
+// Usage:
+findEmail("sharif").ifPresent(email -> sendEmail(email));
+String safeEmail = findEmail("unknown").orElse("default@test.com");
+
+⚠️ COMMON MESTAKES:
+• Calling .get() without checking .isPresent() first (defeats the purpose!).
+• Printing the Optional object itself instead of the unwrapped lambda parameter.
+
+🔜 NEXT: SESSION M3 - STREAMS API BASICS
+===========================================

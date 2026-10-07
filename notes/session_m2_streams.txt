@@ -1,0 +1,27 @@
+===========================================
+SESSION M3: STREAMS API BASICS
+===========================================
+🎯 OBJECTIVE: Process collections declaratively, replacing clunky 
+for-loops with clean, readable pipelines.
+
+🔑 KEY CONCEPTS:
+• Imperative vs. Declarative: Telling Java "how" vs. telling it "what".
+• Source: .stream() or .parallelStream()
+• Intermediate Operations: Return a new Stream (lazy evaluation). 
+  Examples: .filter(), .map(), .sorted(), .distinct()
+• Terminal Operations: Produce a final result and close the stream. 
+  Examples: .collect(), .forEach(), .count(), .findFirst()
+• Collectors: Utility class for gathering results (toList(), toSet(), joining()).
+
+💻 SYNTAX CHEAT SHEET:
+List<String> result = list.stream()
+    .filter(item -> item.length() > 5)
+    .map(String::toUpperCase) // Method reference!
+    .collect(Collectors.toList());
+
+⚠️ COMMON MISTAKES:
+• Forgetting the terminal operation (the stream won't execute without it!).
+• Trying to reuse a Stream after a terminal operation has been called (Streams are one-time use).
+
+🔜 NEXT: SESSION M4 - ADVANCED STREAMS (GROUPING & REDUCING)
+===========================================

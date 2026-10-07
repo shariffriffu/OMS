@@ -1,0 +1,26 @@
+===========================================
+SESSION 5: METHODS (FUNCTIONS IN JAVA)
+===========================================
+🎯 OBJECTIVE: Learn to write reusable blocks of code (methods).
+
+🔑 KEY CONCEPTS:
+• Methods must live inside a class.
+• DRY Principle: Don't Repeat Yourself.
+• 4 Parts: Access Modifier, Return Type, Name, Parameters.
+• 'static': Belongs to the class, callable from main().
+• 'void': Returns nothing. 'return': Sends a value back.
+
+💻 SYNTAX CHEAT SHEET:
+public static double calculateTax(double price, double rate) {
+    return price + (price * rate);
+}
+// Calling it:
+double final = calculateTax(100.0, 0.08);
+
+⚠️ COMMON MISTAKES:
+• Naming a method the exact same as the class (that's a Constructor).
+• Forgetting 'return' when the type is not void.
+• Method names must be camelCase (calculateTax ✅, CalculateTax ❌).
+
+🔜 NEXT: SESSION 6 - OOP: CLASSES & OBJECTS
+===========================================

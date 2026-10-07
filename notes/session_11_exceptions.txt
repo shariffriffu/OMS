@@ -1,0 +1,31 @@
+===========================================
+SESSION 11: EXCEPTION HANDLING
+===========================================
+🎯 OBJECTIVE: Handle errors gracefully so the OMS doesn't crash 
+when unexpected data or operations occur.
+
+🔑 KEY CONCEPTS:
+• Exception: An object representing an error that disrupts normal flow.
+• try: Block of code to test for errors.
+• catch: Block of code to handle the error if it occurs.
+• finally: Block of code that executes NO MATTER WHAT (great for cleanup).
+• throw: Manually triggering an exception for invalid business logic.
+
+💻 SYNTAX CHEAT SHEET:
+try {
+    int result = 10 / 0;
+} catch (ArithmeticException e) {
+    System.out.println("Error: " + e.getMessage());
+} finally {
+    System.out.println("Cleanup done.");
+}
+
+// Throwing custom errors:
+if (qty < 0) throw new IllegalArgumentException("Qty cannot be negative");
+
+⚠️ COMMON MISTAKES:
+• Catching generic `Exception` instead of specific ones (like `ArithmeticException`).
+• Forgetting that `throw` immediately stops the current method execution.
+
+🔜 NEXT: PHASE 2 - DATABASE & SQL FOUNDATION
+===========================================

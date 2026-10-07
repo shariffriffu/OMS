@@ -1,0 +1,33 @@
+===========================================
+SESSION 10: COLLECTIONS FRAMEWORK
+===========================================
+🎯 OBJECTIVE: Manage dynamic data using ArrayList (lists) and 
+HashMap (key-value pairs) instead of fixed-size arrays.
+
+🔑 KEY CONCEPTS:
+• ArrayList: Grows automatically. Use for lists of items.
+• HashMap: Stores Key-Value pairs. Lightning-fast lookups.
+• HashMap does NOT guarantee insertion order (it hashes keys).
+• Collections hold Objects (e.g., Integer, String), not primitives (int).
+• Looping a HashMap: Use `map.entrySet()` to get both Key and Value.
+
+💻 SYNTAX CHEAT SHEET:
+// ArrayList
+ArrayList<String> list = new ArrayList<>();
+list.add("Item");
+
+// HashMap
+HashMap<String, Double> map = new HashMap<>();
+map.put("Key", 10.0);
+Double val = map.get("Key");
+
+for (Map.Entry<String, Double> entry : map.entrySet()) {
+    System.out.println(entry.getKey() + ": " + entry.getValue());
+}
+
+⚠️ COMMON MISTAKES:
+• Forgetting to `import java.util.HashMap;`
+• Expecting HashMap to print in the exact order items were added.
+
+🔜 NEXT: SESSION 11 - EXCEPTION HANDLING
+===========================================

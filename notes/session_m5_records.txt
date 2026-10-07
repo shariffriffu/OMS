@@ -1,0 +1,29 @@
+===========================================
+SESSION M5: RECORDS (JAVA 14+)
+===========================================
+🎯 OBJECTIVE: Eliminate boilerplate code by using immutable data 
+carriers for DTOs and simple data classes.
+
+🔑 KEY CONCEPTS:
+• A `record` automatically generates:
+  1. private final fields for all components.
+  2. A public canonical constructor.
+  3. Accessor methods named exactly after the field (e.g., name(), not getName()).
+  4. equals(), hashCode(), and toString() implementations.
+• Records are inherently IMMUTABLE. You cannot change their state after creation.
+• Perfect for DTOs, API responses, and configuration data.
+
+💻 SYNTAX CHEAT SHEET:
+public record Customer(String name, String email) {}
+
+// Usage:
+Customer c = new Customer("Shariff", "shariff@oms.com");
+System.out.println(c.name());      // Accessor
+System.out.println(c);             // Auto-generated toString: Customer[name=Shariff, email=shariff@oms.com]
+
+⚠️ COMMON MISTAKES:
+• Trying to add a setter method (records are immutable!).
+• Forgetting that the accessor is `field()`, not `getField()`.
+
+🔜 NEXT: MODULE B - ADVANCED COLLECTIONS & INTERNALS
+===========================================

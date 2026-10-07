@@ -1,0 +1,26 @@
+===========================================
+SESSION 15: JDBC (JAVA DATABASE CONNECTIVITY)
+===========================================
+🎯 OBJECTIVE: Connect Java applications to PostgreSQL using the JDBC Driver.
+
+🔑 KEY CONCEPTS:
+• JDBC Driver: The .jar translator between Java and SQL.
+• Connection: The active link (requires URL, user, password).
+• Statement: Executes the SQL query.
+• ResultSet: A cursor pointing to the grid of returned data. Use rs.next() to iterate.
+• Classpath (-cp): Required to tell Java where the .jar file is.
+
+💻 SYNTAX CHEAT SHEET:
+Connection conn = DriverManager.getConnection(url, user, password);
+Statement stmt = conn.createStatement();
+ResultSet rs = stmt.executeQuery("SELECT * FROM table");
+while(rs.next()) { System.out.println(rs.getString("col")); }
+// ALWAYS close: rs.close(); stmt.close(); conn.close();
+
+⚠️ COMMON MISTAKES:
+• Forgetting `-cp` when running.
+• Using `javac` instead of `java` to run.
+• Forgetting to close resources (leads to memory/connection leaks).
+
+🔜 NEXT: PHASE 3 - SPRING BOOT CORE ARCHITECTURE
+===========================================

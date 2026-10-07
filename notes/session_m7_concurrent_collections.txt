@@ -1,0 +1,32 @@
+﻿===========================================
+SESSION M7: CONCURRENT COLLECTIONS
+===========================================
+🎯 OBJECTIVE: Handle data safely when multiple threads access 
+or modify a collection simultaneously.
+
+🔑 KEY CONCEPTS:
+• Race Condition: When two threads read/modify the same data at 
+  the same time, causing data corruption (e.g., inventory going negative).
+• HashMap is NOT thread-safe. Concurrent modifications can cause 
+  infinite loops or lost data.
+• ConcurrentHashMap: Divides the map into segments, locking only 
+  the specific bucket being modified. Allows safe, high-performance 
+  concurrent reads and writes.
+• Atomic Operations: Methods like .computeIfPresent() guarantee 
+  that the read-modify-write cycle happens without thread interference.
+
+💻 SYNTAX CHEAT SHEET:
+Map<String, Integer> inventory = new ConcurrentHashMap<>();
+
+// Safe, atomic update with business logic:
+inventory.computeIfPresent("Laptop", (key, stock) -> {
+    if (stock > 0) return stock - 1;
+    return stock; // Prevent negative stock
+});
+
+⚠️ COMMON MISTAKES:
+• Using standard HashMap in a multi-threaded environment (like a web server).
+• Using .get() followed by .put() instead of atomic methods like .computeIfPresent().
+
+🔜 NEXT: SESSION M8 - THREAD POOLS & EXECUTORSERVICE
+===========================================

@@ -1,0 +1,32 @@
+===========================================
+SESSION 18: THE SERVICE LAYER & DEPENDENCY INJECTION
+===========================================
+🎯 OBJECTIVE: Separate web logic (Controller) from business logic (Service).
+
+🔑 KEY CONCEPTS:
+• Separation of Concerns: Controllers handle HTTP; Services handle rules.
+• @Service: Marks a class as a business logic component managed by Spring.
+• @Autowired: Tells Spring to automatically find and inject the Service 
+  into the Controller (Dependency Injection). No 'new' keyword needed!
+
+💻 SYNTAX CHEAT SHEET:
+@Service
+public class MyService {
+    public String doWork() { return "Work done"; }
+}
+
+@RestController
+public class MyController {
+    @Autowired
+    private MyService myService; // Spring injects this automatically
+    
+    @GetMapping("/work")
+    public String work() { return myService.doWork(); }
+}
+
+⚠️ COMMON MISTAKES:
+• Forgetting @Service or @Autowired (results in NullPointerException).
+• Putting business logic directly inside the @GetMapping method.
+
+🔜 NEXT: SESSION 19 - DTO PATTERN (DATA TRANSFER OBJECTS)
+===========================================

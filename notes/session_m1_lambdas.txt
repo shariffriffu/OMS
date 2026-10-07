@@ -1,0 +1,28 @@
+===========================================
+SESSION M1: LAMBDAS & FUNCTIONAL INTERFACES
+===========================================
+🎯 OBJECTIVE: Write clean, modern Java by replacing bulky anonymous 
+classes with concise Lambda expressions.
+
+🔑 KEY CONCEPTS:
+• Lambda: An anonymous function. Syntax: (parameters) -> { body }
+• Functional Interface: An interface with EXACTLY ONE abstract method 
+  (e.g., Comparator, Runnable). Lambdas can only be used with these.
+• @FunctionalInterface: Annotation to enforce the "one method" rule.
+• Method References: An even shorter lambda (e.g., String::length).
+
+💻 SYNTAX CHEAT SHEET:
+// Old Way:
+Collections.sort(list, new Comparator<String>() {
+    public int compare(String a, String b) { return a.length() - b.length(); }
+});
+
+// Modern Lambda Way:
+Collections.sort(list, (a, b) -> Integer.compare(a.length(), b.length()));
+
+⚠️ COMMON MISTAKES:
+• Forgetting that the interface must have only ONE abstract method.
+• Overcomplicating the lambda body (keep it to one line if possible!).
+
+🔜 NEXT: SESSION M2 - THE OPTIONAL CLASS
+===========================================
