@@ -1,0 +1,27 @@
+﻿===========================================
+SESSION M12: THE BUILDER PATTERN
+===========================================
+🎯 OBJECTIVE: Create complex objects cleanly without "telescoping" 
+constructors (multiple confusing constructors).
+
+🔑 KEY CONCEPTS:
+• Telescoping Constructor Anti-Pattern: Writing 5+ constructors for 
+  every combination of optional parameters. Hard to read and maintain.
+• Builder Pattern: A nested static class that holds mutable fields, 
+  allows method chaining, and constructs the final immutable object.
+• Method Chaining (Fluent Interface): Returning `this` from setter 
+  methods allows `.setA().setB().setC()` syntax.
+• Immutability: The final `Order` object has `final` fields and no 
+  setters, making it thread-safe and predictable.
+
+💻 SYNTAX CHEAT SHEET:
+public Order build() {
+    return new Order(this); // Pass builder state to private constructor
+}
+
+⚠️ REAL WORLD CONNECTION:
+This is exactly what the popular `@Builder` annotation from the 
+Lombok library generates for you automatically in enterprise projects!
+
+🔜 NEXT: SESSION M13 - THE STRATEGY PATTERN
+===========================================

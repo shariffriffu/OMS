@@ -1,0 +1,28 @@
+﻿===========================================
+SESSION M14: UNIT TESTING MINDSET
+===========================================
+🎯 OBJECTIVE: Prove code correctness automatically using the 
+Arrange-Act-Assert pattern.
+
+🔑 KEY CONCEPTS:
+• Arrange: Set up the objects and data needed for the test.
+• Act: Execute the specific method you want to test.
+• Assert: Verify that the actual result matches the expected result.
+• Edge Cases: Always test the boundaries (e.g., exactly $100, not just > $100).
+
+💻 SYNTAX CHEAT SHEET (Manual):
+if (actual == expected) { passed++; } else { failed++; }
+
+💻 SYNTAX CHEAT SHEET (JUnit 5):
+@Test
+void testFreeShipping() {
+    FreeShipping strategy = new FreeShipping();
+    assertEquals(0.0, strategy.calculate(100.0));
+}
+
+⚠️ SENIOR MINDSET:
+If it's not tested, it's broken. Tests are your safety net when 
+refactoring code in the future.
+
+🔜 NEXT: RETURN TO OMS PROJECT OR FINAL CAPSTONE
+===========================================

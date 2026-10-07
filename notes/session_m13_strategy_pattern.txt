@@ -1,0 +1,27 @@
+﻿===========================================
+SESSION M13: THE STRATEGY PATTERN
+===========================================
+🎯 OBJECTIVE: Swap algorithms at runtime without messy if/else 
+statements, adhering to the Open/Closed Principle.
+
+🔑 KEY CONCEPTS:
+• Open/Closed Principle: Classes should be open for extension, 
+  but closed for modification.
+• Strategy Interface: Defines a common contract (e.g., calculate()).
+• Concrete Strategies: Individual classes implementing the interface 
+  with specific logic (e.g., StandardShipping, FreeShipping).
+• Context: The class (e.g., Order) that holds a reference to the 
+  strategy and delegates the work to it.
+
+💻 SYNTAX CHEAT SHEET:
+// Context delegates to the strategy
+public double getCost(double total) {
+    return this.strategy.calculate(total);
+}
+
+⚠️ REAL WORLD CONNECTION:
+Spring Boot uses this pattern everywhere! (e.g., different PasswordEncoders, 
+different TransactionManagers). You just swap the implementation.
+
+🔜 NEXT: SESSION M14 - UNIT TESTING WITH JUNIT 5
+===========================================

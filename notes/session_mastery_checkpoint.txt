@@ -1,0 +1,21 @@
+﻿===========================================
+MASTERY CHECKPOINT: MODERN JAVA STREAMS & OPTIONALS
+===========================================
+🎯 OBJECTIVE: Prove that clean, readable Java is achievable 
+by combining Streams, Lambdas, and Optionals.
+
+💻 THE WINNING CODE:
+String vipEmail = customers.stream()
+        .filter(c -> c.orders > 5)
+        .findFirst()
+        .map(c -> c.email)
+        .orElse("No vip email");
+
+🔑 WHY THIS IS SENIOR-LEVEL:
+1. No messy for-loops or manual index tracking.
+2. Declarative: It reads like English ("filter, find first, map, or else").
+3. Safe: .orElse() guarantees we never get a NullPointerException.
+4. Efficient: .findFirst() stops searching the moment it finds a match.
+
+🔜 NEXT: Design Patterns OR Return to OMS Project
+===========================================
