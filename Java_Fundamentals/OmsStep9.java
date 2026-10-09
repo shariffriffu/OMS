@@ -2,56 +2,68 @@
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
+import java.util.stream.Collectors;
 
-public class OmsStep2 {
-    public static void main(String[] args) {
-        // Cart cart = new Cart.Builder()
-        // .build();
-
-        // cart.addItem(new Cart.Item("Laptop", 10000, "Shariff", LocalDate.now()));
-        // cart.addItem(new Cart.Item("Mouse", 100, "riff", LocalDate.now()));
-        // cart.addItem(new Cart.Item("Keyboard", 100, "seb", LocalDate.now()));
-
-        // double grandTotal = cart.calculateTotal();
-        // System.out.println("grand total :" + grandTotal);
-
-        // Optional<Cart.Item> name = cart.findItemByName("Laptop");
-        // name.ifPresentOrElse(item -> {
-        // System.out.println("item found: " + item);
-        // }, () -> System.out.println("item not found"));
-        // cart.setDiscountStrategy(new TwentyPercentDiscount());
-        // grandTotal = cart.calculateTotal();
-        // System.out.println("grand total after discount :" + grandTotal);
-
+public class OmsStep9 {
+    public static void main(String[] args) throws InterruptedException {
+        ConcurrentLinkedQueue<Cart> carts = new ConcurrentLinkedQueue<>();
+        Map<String, Integer> inventry = new ConcurrentHashMap<>();
+        inventry.put("laptop", 2);
+        inventry.put("mouse", 5);
+        inventry.put("keyboard", 5);
         ExecutorService executor = Executors.newFixedThreadPool(3);
 
         executor.submit(() -> {
+            int remainingStock = inventry.computeIfPresent("laptop", (key, stock) -> {
+                if (stock > 0) {
+                    System.out.println(Thread.currentThread().getName() + " purchased!");
+                    return stock - 1;
+
+                }
+                System.out.println(Thread.currentThread().getName() + " out of stock!");
+                return stock;
+            });
             Cart cart = new Cart.Builder()
                     .setCustomerName("shariff")
                     .setOrderDate(LocalDate.now())
-                    .setItemName("Laptop")
+                    .setItemName("laptop")
                     .setPrice(10000)
                     .setDiscountStrategy(new TwentyPercentDiscount())
                     .build();
-
+            carts.add(cart);
             double grandTotal = cart.calculateTotal();
             System.out.println("grand total :" + grandTotal);
         });
+
         executor.submit(() -> {
+            int remainingStock = inventry.computeIfPresent("laptop", (key, stock) -> {
+                if (stock > 0) {
+                    System.out.println(Thread.currentThread().getName() + " purchased! " + stock);
+                    return stock - 1;
+
+                }
+                System.out.println(Thread.currentThread().getName() + " out of stock!");
+                return stock;
+            });
             Cart cart = new Cart.Builder()
                     .setCustomerName("Riffu")
                     .setOrderDate(LocalDate.now())
-                    .setItemName("mouse")
+                    .setItemName("laptop")
                     .setPrice(100)
                     .setDiscountStrategy(new NoDiscount())
                     .build();
-
+            carts.add(cart);
             double grandTotal = cart.calculateTotal();
             System.out.println("grand total :" + grandTotal);
         });
+
         executor.submit(() -> {
             Cart cart = new Cart.Builder()
                     .setCustomerName("seb")
@@ -60,11 +72,21 @@ public class OmsStep2 {
                     .setPrice(100)
                     .setDiscountStrategy(new TwentyPercentDiscount())
                     .build();
-
+            carts.add(cart);
             double grandTotal = cart.calculateTotal();
-            System.out.println("grand total :" + grandTotal);
+            System.out.println(Thread.currentThread().getName() + " finished! Total for " + cart.getCustomerName()
+                    + " is $" + grandTotal);
         });
         executor.shutdown();
+        try {
+            executor.awaitTermination(3, TimeUnit.SECONDS);
+        } catch (InterruptedException e) {
+        }
+        System.out.println("\"All carts processed successfully!\"");
+        Map<String, Double> revenueReport = carts.stream()
+                .collect(Collectors.groupingBy(Cart::getCustomerName, Collectors.summingDouble(Cart::calculateTotal)));
+
+        System.out.println("Revenue Report: " + revenueReport);
 
     }
 }
@@ -82,6 +104,10 @@ class Cart {
     }
 
     public record Item(String name, double price, String customerName, LocalDate orderDate) {
+    }
+
+    public String getCustomerName() {
+        return this.customerName;
     }
 
     private Cart(Builder builder) {
