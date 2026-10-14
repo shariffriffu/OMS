@@ -61,12 +61,15 @@ class Employee {
         this.department = department;
         this.salary = salary;
     }
+
     public double getSalary() {
         return salary;
     }
+
     public String getName() {
         return name;
     }
+
     public String getDepartment() {
         return department;
     }

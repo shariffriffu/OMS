@@ -1,0 +1,806 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Zero to Senior Java Backend Engineer</title>
+<style>
+:root{
+  --bg:#0b1120; --panel:#111a2e; --panel2:#16213a; --line:#1f2d4a;
+  --text:#d5dcea; --muted:#8a97b2; --head:#f1f5f9;
+  --em:#10b981; --em2:#34d399; --emdim:rgba(16,185,129,.12);
+  --warn:#f59e0b; --code:#070c18; --sb:272px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:28px}
+body{margin:0;background:var(--bg);color:var(--text);font:16px/1.7 -apple-system,BlinkMacSystemFont,"Inter","Segoe UI",Roboto,sans-serif;-webkit-font-smoothing:antialiased}
+a{color:var(--em2);text-decoration:none}
+#progress{position:fixed;top:0;left:0;right:0;height:4px;background:var(--line);z-index:60}
+#progress-bar{height:100%;width:0;background:linear-gradient(90deg,var(--em),var(--em2));transition:width .35s}
+#sidebar{position:fixed;top:4px;bottom:0;left:0;width:var(--sb);background:var(--panel);border-right:1px solid var(--line);padding:22px 16px;overflow-y:auto;z-index:50;transition:transform .25s}
+.brand{font-weight:800;color:var(--head);font-size:1.05rem;letter-spacing:-.01em;line-height:1.3}
+.brand span{color:var(--em2)}
+.pct{margin:14px 0 18px;font-size:.8rem;color:var(--muted)}
+.pct b{color:var(--em2);font-size:1.15rem}
+#sidebar nav a{display:block;padding:8px 12px;border-radius:8px;color:var(--muted);font-size:.9rem;margin:2px 0;border-left:2px solid transparent}
+#sidebar nav a:hover{background:var(--panel2);color:var(--head)}
+#sidebar nav a.active{background:var(--emdim);color:var(--em2);border-left-color:var(--em)}
+#sidebar nav .sub{padding-left:26px;font-size:.82rem}
+#menu{display:none;position:fixed;top:14px;left:14px;z-index:70;background:var(--panel2);color:var(--head);border:1px solid var(--line);border-radius:8px;padding:8px 12px;font-size:1rem;cursor:pointer}
+main{margin-left:var(--sb);padding:56px clamp(20px,5vw,72px) 100px;max-width:calc(var(--sb) + 1000px)}
+section{margin-bottom:84px}
+.eyebrow{color:var(--em2);font-size:.75rem;letter-spacing:.14em;text-transform:uppercase;font-weight:700}
+h1{font-size:clamp(2rem,4vw,2.9rem);line-height:1.15;color:var(--head);letter-spacing:-.03em;margin:.3em 0 .4em}
+h2{font-size:1.9rem;color:var(--head);letter-spacing:-.02em;margin:.2em 0 .5em;padding-bottom:12px;border-bottom:1px solid var(--line)}
+h3{color:var(--head);margin:1.6em 0 .5em;font-size:1.15rem}
+p{margin:.6em 0}
+.lead{color:var(--muted);font-size:1.1rem;max-width:720px}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px;margin:26px 0}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:16px}
+.card b{color:var(--em2);display:block;font-size:1.5rem}
+.card small{color:var(--muted)}
+details{background:var(--panel);border:1px solid var(--line);border-radius:12px;margin:12px 0;overflow:hidden}
+details[open]{border-color:#27406b}
+summary{cursor:pointer;padding:14px 18px;font-weight:600;color:var(--head);list-style:none;display:flex;align-items:center;gap:10px}
+summary::-webkit-details-marker{display:none}
+summary::before{content:"▸";color:var(--em2);transition:transform .2s;font-size:.85rem}
+details[open]>summary::before{transform:rotate(90deg)}
+summary:hover{background:var(--panel2)}
+.body{padding:4px 20px 18px;border-top:1px solid var(--line)}
+.done-row{margin-top:16px;padding-top:12px;border-top:1px dashed var(--line);font-size:.85rem;color:var(--muted)}
+label.chk{display:flex;gap:10px;align-items:flex-start;cursor:pointer;padding:3px 0}
+input[type=checkbox]{accent-color:var(--em);width:17px;height:17px;margin-top:5px;flex:none;cursor:pointer}
+label.chk:has(input:checked) span{color:var(--muted);text-decoration:line-through}
+.badge{font-size:.7rem;padding:2px 8px;border-radius:999px;background:var(--emdim);color:var(--em2);font-weight:700;margin-left:auto}
+.week{margin:14px 0 4px;color:var(--em2);font-size:.78rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase}
+.goal{background:var(--emdim);border-left:3px solid var(--em);padding:10px 14px;border-radius:0 8px 8px 0;margin:14px 0;color:var(--head)}
+.analogy{background:rgba(245,158,11,.08);border-left:3px solid var(--warn);padding:10px 14px;border-radius:0 8px 8px 0;margin:14px 0}
+.analogy b{color:var(--warn)}
+.code{position:relative;margin:14px 0}
+.code pre{margin:0;background:var(--code);border:1px solid var(--line);border-radius:10px;padding:16px 16px;overflow-x:auto;font:13.5px/1.6 "JetBrains Mono","Fira Code",ui-monospace,Menlo,Consolas,monospace;color:#cfe3ff}
+.code .lang{position:absolute;left:14px;top:-9px;background:var(--panel2);border:1px solid var(--line);color:var(--muted);font:600 10px/1 sans-serif;padding:3px 7px;border-radius:5px;text-transform:uppercase;letter-spacing:.08em}
+.copy{position:absolute;top:8px;right:8px;background:var(--panel2);color:var(--muted);border:1px solid var(--line);border-radius:6px;padding:4px 10px;font-size:.72rem;cursor:pointer}
+.copy:hover{color:var(--head);border-color:var(--em)}
+.copy.ok{color:var(--em2);border-color:var(--em)}
+code.i{background:var(--panel2);padding:1px 6px;border-radius:5px;font:.88em ui-monospace,Menlo,Consolas,monospace;color:var(--em2)}
+table{width:100%;border-collapse:collapse;margin:14px 0;font-size:.9rem;display:block;overflow-x:auto}
+th,td{text-align:left;padding:9px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+th{color:var(--head);background:var(--panel2);white-space:nowrap}
+.flow{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:16px 0}
+.node{background:var(--panel2);border:1px solid var(--line);border-radius:8px;padding:8px 14px;font-weight:600;color:var(--head);font-size:.88rem}
+.node.em{border-color:var(--em);color:var(--em2)}
+.node.bad{border-color:#ef4444;color:#f87171}
+.arrow{color:var(--em2)}
+ul,ol{padding-left:22px}li{margin:4px 0}
+footer{color:var(--muted);font-size:.85rem;border-top:1px solid var(--line);padding-top:20px}
+@media(max-width:900px){
+  #menu{display:block}
+  #sidebar{transform:translateX(-100%)}
+  #sidebar.open{transform:none;box-shadow:0 0 60px rgba(0,0,0,.6)}
+  main{margin-left:0;padding-top:70px}
+}
+</style>
+</head>
+<body>
+<div id="progress"><div id="progress-bar"></div></div>
+<button id="menu" aria-label="Toggle navigation">☰</button>
+
+<aside id="sidebar">
+  <div class="brand">Zero to Senior<br><span>Java Backend</span> Engineer</div>
+  <div class="pct"><b id="pct">0%</b> complete · <span id="count">0/0</span> items</div>
+  <nav>
+    <a href="#top">Overview</a>
+    <a href="#roadmap">1 · 6-Month Roadmap</a>
+    <a href="#concepts">2 · Concepts Demystified</a>
+    <a href="#cheats">3 · Cheat Sheets</a>
+    <a href="#oms">4 · Telecom OMS Project</a>
+    <a href="#interview">5 · Interview Prep</a>
+    <a href="#salary">6 · Salary &amp; Switch Strategy</a>
+  </nav>
+</aside>
+
+<main id="top">
+  <div class="eyebrow">Learning Dashboard</div>
+  <h1>Zero to Senior Java Backend Engineer</h1>
+  <p class="lead">A 6-month plan for a senior software engineer with 4 years of Flutter and mobile architecture experience, currently at 10 LPA, moving to Java backend. You already know async work, APIs from the client side, state, and shipping software. This dashboard fills in the server side and plans the salary move.</p>
+  <div class="cards">
+    <div class="card"><b>24 wks</b><small>Structured weekly checklists</small></div>
+    <div class="card"><b>10 → 14–18 LPA</b><small>Realistic target for the switch (see Section 6)</small></div>
+    <div class="card"><b>1 project</b><small>Telecom Order Management System</small></div>
+    <div class="card"><b>10 Qs</b><small>Core interview answers</small></div>
+    <div class="card"><b>Auto-save</b><small>Progress stored in your browser</small></div>
+  </div>
+
+<!-- ============ SECTION 1 ============ -->
+<section id="roadmap">
+  <div class="eyebrow">Section 1</div>
+  <h2>The 6-Month Roadmap</h2>
+  <p>Aim for 2–3 focused hours on weekdays and a longer block on weekends. Tick items as you finish them; the top bar tracks everything.</p>
+  <div id="roadmap-root"></div>
+  <div class="goal"><b>Rule of thumb:</b> every week ends with something committed to GitHub. Recruiters read repos, not certificates.</div>
+</section>
+
+<!-- ============ SECTION 2 ============ -->
+<section id="concepts">
+  <div class="eyebrow">Section 2</div>
+  <h2>Core Concepts Demystified</h2>
+  <p>Spring feels like magic because it hides plain Java behind annotations. Here is what is really going on.</p>
+
+  <details class="topic" open>
+    <summary>Dependency Injection (IoC) <span class="badge">CORE</span></summary>
+    <div class="body">
+      <div class="analogy"><b>Analogy:</b> A restaurant chef does not farm vegetables or build the oven. Suppliers deliver what the kitchen needs and the manager decides which supplier to use. The chef just says, "I need a <i>vegetable supplier</i>." Spring is the manager: your class declares what it needs and Spring hands it over.</div>
+      <p><b>Inversion of Control:</b> instead of your code creating its collaborators (<code class="i">new</code>), a container creates and wires them. <b>Dependency Injection</b> is the mechanism: dependencies arrive through the constructor.</p>
+      <div class="code"><span class="lang">java</span><pre><code>// WITHOUT DI: tightly coupled, hard to test, hard to swap
+class OrderService {
+    private final OrderRepository repo = new MySqlOrderRepository(); // hard-wired
+}
+
+// WITH DI: depends on an abstraction, Spring supplies the implementation
+public interface OrderRepository { Optional&lt;Order&gt; findById(Long id); }
+
+@Repository
+class MySqlOrderRepository implements OrderRepository { /* ... */ }
+
+@Service
+class OrderService {
+    private final OrderRepository repo;
+
+    // Single constructor: @Autowired is optional in Spring 4.3+
+    OrderService(OrderRepository repo) { this.repo = repo; }
+}
+
+// In a unit test, no Spring needed:
+var service = new OrderService(new InMemoryOrderRepository());</code></pre></div>
+      <p><b>Under the hood:</b> at startup Spring scans for <code class="i">@Component</code>-family classes, builds <code>BeanDefinition</code>s, creates the beans in dependency order, and stores them in the <code>ApplicationContext</code> (a map of name/type to singleton). Prefer <b>constructor injection</b>: dependencies are <code class="i">final</code>, required, and testable. Avoid field injection.</p>
+      <p><b>Mobile parallel:</b> same idea as Hilt/Dagger on Android or Swinject on iOS.</p>
+    </div>
+  </details>
+
+  <details class="topic">
+    <summary>ORM and Hibernate <span class="badge">CORE</span></summary>
+    <div class="body">
+      <div class="analogy"><b>Analogy:</b> A translator between two people who speak different languages. Your Java objects speak "objects and references"; the database speaks "tables and foreign keys." Hibernate translates in both directions so you rarely write SQL by hand.</div>
+      <p><b>JPA</b> is the specification (interfaces and annotations). <b>Hibernate</b> is the main implementation. <b>Spring Data JPA</b> sits on top and generates repository implementations for you.</p>
+      <div class="code"><span class="lang">java</span><pre><code>@Entity
+@Table(name = "subscriber")
+public class Subscriber {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @Column(name = "msisdn", nullable = false, unique = true, length = 15)
+    private String msisdn;
+
+    @Column(name = "full_name", nullable = false)
+    private String fullName;
+
+    @Enumerated(EnumType.STRING)   // store "ACTIVE", not 0/1
+    private SubscriberStatus status;
+
+    protected Subscriber() {}      // JPA requires a no-arg constructor
+}</code></pre></div>
+      <p>Which maps to this SQL (what Hibernate generates / expects):</p>
+      <div class="code"><span class="lang">sql</span><pre><code>CREATE TABLE subscriber (
+    id        BIGINT AUTO_INCREMENT PRIMARY KEY,
+    msisdn    VARCHAR(15)  NOT NULL UNIQUE,
+    full_name VARCHAR(255) NOT NULL,
+    status    VARCHAR(255)
+);
+
+-- repo.save(sub)       =&gt; INSERT INTO subscriber (...) VALUES (...)
+-- repo.findById(1L)    =&gt; SELECT ... FROM subscriber WHERE id = 1
+-- sub.setFullName("X") inside @Transactional =&gt; UPDATE on commit (dirty checking)</code></pre></div>
+      <p><b>Key idea, the persistence context:</b> inside a transaction Hibernate tracks every entity it loaded. If you change a field, it detects the change ("dirty checking") and issues the <code class="i">UPDATE</code> at commit, with no explicit <code>save()</code> needed.</p>
+    </div>
+  </details>
+
+  <details class="topic">
+    <summary>The Request Lifecycle <span class="badge">CORE</span></summary>
+    <div class="body">
+      <div class="flow">
+        <span class="node">Client</span><span class="arrow">→</span>
+        <span class="node">Filters</span><span class="arrow">→</span>
+        <span class="node">DispatcherServlet</span><span class="arrow">→</span>
+        <span class="node em">Controller</span><span class="arrow">→</span>
+        <span class="node em">Service</span><span class="arrow">→</span>
+        <span class="node em">Repository</span><span class="arrow">→</span>
+        <span class="node">Hibernate</span><span class="arrow">→</span>
+        <span class="node">DB</span>
+      </div>
+      <table>
+        <tr><th>Layer</th><th>Responsibility</th><th>Never do this here</th></tr>
+        <tr><td><b>Controller</b></td><td>HTTP only: parse request, validate input (<code>@Valid</code>), call service, return DTO + status code</td><td>Business rules, DB access</td></tr>
+        <tr><td><b>Service</b></td><td>Business logic, transaction boundary (<code>@Transactional</code>), orchestration</td><td>HTTP concerns (<code>HttpServletRequest</code>)</td></tr>
+        <tr><td><b>Repository</b></td><td>Data access via Spring Data JPA / queries</td><td>Business decisions</td></tr>
+        <tr><td><b>DTO / Entity</b></td><td>DTO = API contract. Entity = DB mapping. Keep them separate.</td><td>Return entities straight from controllers</td></tr>
+      </table>
+      <div class="code"><span class="lang">java</span><pre><code>@RestController
+@RequestMapping("/api/v1/orders")
+class OrderController {
+    private final OrderService service;
+    OrderController(OrderService service) { this.service = service; }
+
+    @PostMapping
+    ResponseEntity&lt;OrderResponse&gt; create(@Valid @RequestBody CreateOrderRequest req) {
+        OrderResponse created = service.create(req);                  // 1. delegate
+        return ResponseEntity.status(HttpStatus.CREATED).body(created); // 2. 201
+    }
+}
+
+@Service
+class OrderService {
+    private final ServiceOrderRepository repo;
+    OrderService(ServiceOrderRepository repo) { this.repo = repo; }
+
+    @Transactional                                   // opens tx, commits or rolls back
+    OrderResponse create(CreateOrderRequest req) {
+        ServiceOrder order = ServiceOrder.pending(req.subscriberId(), req.serviceCode());
+        return OrderResponse.from(repo.save(order)); // INSERT
+    }
+}
+
+interface ServiceOrderRepository extends JpaRepository&lt;ServiceOrder, Long&gt; {}</code></pre></div>
+      <p><b>The hidden parts:</b> Jackson converts JSON to your DTO and back. <code>DispatcherServlet</code> picks the controller method by URL and HTTP verb. A <code>@RestControllerAdvice</code> turns exceptions into clean error responses. Spring Security's filters run before the controller.</p>
+    </div>
+  </details>
+</section>
+
+<!-- ============ SECTION 3 ============ -->
+<section id="cheats">
+  <div class="eyebrow">Section 3</div>
+  <h2>Java &amp; Spring Boot Cheat Sheets</h2>
+
+  <details class="topic" open>
+    <summary>Modern Java (8 to 21): Lambdas, Streams, Optional, and friends</summary>
+    <div class="body">
+      <h3>Lambdas &amp; functional interfaces</h3>
+      <div class="code"><span class="lang">java</span><pre><code>Function&lt;String,Integer&gt; len   = s -&gt; s.length();
+Predicate&lt;String&gt; notEmpty     = s -&gt; !s.isBlank();
+Supplier&lt;List&lt;String&gt;&gt; make   = ArrayList::new;       // method reference
+Consumer&lt;String&gt; print         = System.out::println;
+BiFunction&lt;Integer,Integer,Integer&gt; add = Integer::sum;</code></pre></div>
+      <h3>Streams</h3>
+      <div class="code"><span class="lang">java</span><pre><code>List&lt;String&gt; activeNames = subscribers.stream()
+    .filter(s -&gt; s.getStatus() == Status.ACTIVE)   // keep
+    .map(Subscriber::getFullName)                  // transform
+    .sorted()
+    .toList();                                     // Java 16+
+
+Map&lt;Status, Long&gt; countByStatus = subscribers.stream()
+    .collect(Collectors.groupingBy(Subscriber::getStatus, Collectors.counting()));
+
+double total = orders.stream().mapToDouble(Order::getAmount).sum();
+boolean any  = orders.stream().anyMatch(o -&gt; o.getAmount() &gt; 1000);
+List&lt;String&gt; flat = groups.stream().flatMap(g -&gt; g.members().stream()).toList(); // flatten
+
+// Gotchas: streams are lazy (nothing runs until a terminal op), single-use,
+// and parallelStream() is NOT a free speedup. Measure first.</code></pre></div>
+      <h3>Optional</h3>
+      <div class="code"><span class="lang">java</span><pre><code>Optional&lt;Subscriber&gt; opt = repo.findByMsisdn(msisdn);
+
+String name = opt.map(Subscriber::getFullName).orElse("Unknown");
+Subscriber s = opt.orElseThrow(() -&gt; new NotFoundException("No subscriber " + msisdn));
+opt.ifPresent(sub -&gt; log.info("Found {}", sub.getId()));
+
+// Don't: opt.get() without checking, Optional as a field or method parameter.
+// Do: use it as a return type for "might be absent".</code></pre></div>
+      <h3>Newer language features worth knowing</h3>
+      <div class="code"><span class="lang">java</span><pre><code>// Records (16+): immutable data carriers, ideal for DTOs
+public record CreateOrderRequest(@NotNull Long subscriberId, @NotBlank String serviceCode) {}
+
+// var (10+), text blocks (15+), switch expressions (14+), pattern matching (16+/21)
+var msg = switch (status) {
+    case PENDING      -&gt; "Waiting";
+    case PROVISIONING -&gt; "In progress";
+    case ACTIVE       -&gt; "Live";
+    default           -&gt; "Other";
+};
+if (obj instanceof String s &amp;&amp; !s.isEmpty()) { /* s is already cast */ }
+
+// Virtual threads (21): cheap threads for blocking I/O
+try (var ex = Executors.newVirtualThreadPerTaskExecutor()) { ex.submit(() -&gt; callSlowApi()); }</code></pre></div>
+    </div>
+  </details>
+
+  <details class="topic">
+    <summary>Spring Boot annotations: what they actually do</summary>
+    <div class="body">
+      <table>
+        <tr><th>Annotation</th><th>What it is</th><th>What happens under the hood</th></tr>
+        <tr><td><code>@SpringBootApplication</code></td><td>Entry point</td><td>= <code>@Configuration</code> + <code>@EnableAutoConfiguration</code> + <code>@ComponentScan</code>. Scans your package tree, then applies auto-config based on the classpath.</td></tr>
+        <tr><td><code>@RestController</code></td><td>Web endpoint class</td><td>= <code>@Controller</code> + <code>@ResponseBody</code>. Return values go through <code>HttpMessageConverter</code> (Jackson) into JSON, not a view.</td></tr>
+        <tr><td><code>@Service</code></td><td>Business layer bean</td><td>A <code>@Component</code> with a semantic label. Registered as a singleton bean. No extra behavior.</td></tr>
+        <tr><td><code>@Repository</code></td><td>Data access bean</td><td>A <code>@Component</code> plus <b>exception translation</b>: vendor SQL exceptions become Spring's <code>DataAccessException</code> hierarchy.</td></tr>
+        <tr><td><code>@Autowired</code></td><td>Inject a dependency</td><td>Processed by <code>AutowiredAnnotationBeanPostProcessor</code>. Resolves by <b>type</b> first, then name or <code>@Qualifier</code>. Optional on a single constructor.</td></tr>
+        <tr><td><code>@Transactional</code></td><td>Transaction boundary</td><td>Spring wraps your bean in a <b>proxy</b> (AOP). The proxy begins a tx, calls your method, then commits, or rolls back on <code>RuntimeException</code>/<code>Error</code> (checked exceptions do NOT roll back by default).</td></tr>
+        <tr><td><code>@Bean</code></td><td>Manual bean factory</td><td>Method inside <code>@Configuration</code>. Use for third-party classes you can't annotate.</td></tr>
+        <tr><td><code>@Value / @ConfigurationProperties</code></td><td>Externalized config</td><td>Binds <code>application.yml</code> / env vars into fields or typed objects.</td></tr>
+        <tr><td><code>@Valid</code></td><td>Trigger validation</td><td>Runs Bean Validation (<code>@NotNull</code>, <code>@Size</code>...). Failure throws <code>MethodArgumentNotValidException</code> (400).</td></tr>
+      </table>
+      <h3>@Transactional gotchas (classic interview material)</h3>
+      <div class="code"><span class="lang">java</span><pre><code>@Service
+class PaymentService {
+    @Transactional
+    public void outer() {
+        inner();   // SELF-INVOCATION: bypasses the proxy, so inner's @Transactional is IGNORED
+    }
+    @Transactional(propagation = Propagation.REQUIRES_NEW)
+    public void inner() { }
+}
+// Other traps: private/final methods can't be proxied; the default rolls back only for
+// unchecked exceptions (use rollbackFor = Exception.class); a long tx holds a DB connection.</code></pre></div>
+      <h3>Handy extras</h3>
+      <div class="code"><span class="lang">java</span><pre><code>@RestControllerAdvice
+class GlobalExceptionHandler {
+    @ExceptionHandler(NotFoundException.class)
+    ResponseEntity&lt;ApiError&gt; notFound(NotFoundException e) {
+        return ResponseEntity.status(404).body(new ApiError("NOT_FOUND", e.getMessage()));
+    }
+}</code></pre></div>
+    </div>
+  </details>
+
+  <details class="topic">
+    <summary>JPA annotations &amp; fetch strategies</summary>
+    <div class="body">
+      <table>
+        <tr><th>Annotation</th><th>Purpose</th></tr>
+        <tr><td><code>@Entity</code> / <code>@Table</code></td><td>Marks a class as a DB-mapped entity; customizes the table name</td></tr>
+        <tr><td><code>@Id</code> + <code>@GeneratedValue</code></td><td>Primary key and how it is generated (<code>IDENTITY</code> for auto-increment, <code>SEQUENCE</code> for Postgres/Oracle)</td></tr>
+        <tr><td><code>@Column</code></td><td>Column name, nullability, length, uniqueness</td></tr>
+        <tr><td><code>@OneToMany</code> / <code>@ManyToOne</code></td><td>Relationship. The <b>@ManyToOne side owns</b> the foreign key; <code>mappedBy</code> goes on the inverse side.</td></tr>
+        <tr><td><code>@ManyToMany</code> + <code>@JoinTable</code></td><td>Join table relationship (often better modelled as its own entity)</td></tr>
+        <tr><td><code>@Enumerated(EnumType.STRING)</code></td><td>Store enum names, not ordinals (ordinals break when you reorder)</td></tr>
+        <tr><td><code>@Version</code></td><td>Optimistic locking: concurrent update fails instead of silently overwriting</td></tr>
+      </table>
+      <div class="code"><span class="lang">java</span><pre><code>@Entity
+class Subscriber {
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY) Long id;
+
+    @OneToMany(mappedBy = "subscriber", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List&lt;ServiceOrder&gt; orders = new ArrayList&lt;&gt;();     // LAZY by default
+}
+
+@Entity
+class ServiceOrder {
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY) Long id;
+
+    @ManyToOne(fetch = FetchType.LAZY)                         // override the EAGER default
+    @JoinColumn(name = "subscriber_id", nullable = false)
+    private Subscriber subscriber;                             // owns the FK
+}</code></pre></div>
+      <h3>LAZY vs EAGER</h3>
+      <table>
+        <tr><th></th><th>LAZY</th><th>EAGER</th></tr>
+        <tr><td>Loads</td><td>On first access (via a proxy)</td><td>Immediately with the parent</td></tr>
+        <tr><td>Defaults</td><td><code>@OneToMany</code>, <code>@ManyToMany</code></td><td><code>@ManyToOne</code>, <code>@OneToOne</code></td></tr>
+        <tr><td>Risk</td><td><code>LazyInitializationException</code> outside a session; N+1 queries</td><td>Loads far more than needed, with surprise joins</td></tr>
+        <tr><td>Advice</td><td><b>Make everything LAZY</b>, fetch what you need per query</td><td>Avoid</td></tr>
+      </table>
+      <div class="code"><span class="lang">java</span><pre><code>// N+1 problem: 1 query for orders + N queries for each order.getSubscriber()
+List&lt;ServiceOrder&gt; orders = repo.findAll();
+
+// Fix 1: JOIN FETCH
+@Query("select o from ServiceOrder o join fetch o.subscriber where o.status = :s")
+List&lt;ServiceOrder&gt; findWithSubscriber(@Param("s") OrderStatus s);
+
+// Fix 2: @EntityGraph
+@EntityGraph(attributePaths = "subscriber")
+List&lt;ServiceOrder&gt; findByStatus(OrderStatus s);
+
+// Tip: set spring.jpa.show-sql=true (dev only) and COUNT the queries.</code></pre></div>
+    </div>
+  </details>
+</section>
+
+<!-- ============ SECTION 4 ============ -->
+<section id="oms">
+  <div class="eyebrow">Section 4</div>
+  <h2>Telecom OMS Project Architecture</h2>
+  <p>A Telecom <b>Order Management System</b>: customers (subscribers) order services (data plans, SIMs, add-ons), and the system tracks each order until the service is live. It's a good portfolio piece because it has real state, transactions, and integration points.</p>
+
+  <details class="topic" open>
+    <summary>Scope &amp; stack</summary>
+    <div class="body">
+      <ul>
+        <li><b>Stack:</b> Java 21, Spring Boot 3.x, Spring Data JPA, PostgreSQL, Flyway, Docker, JUnit 5 + Testcontainers.</li>
+        <li><b>API:</b> REST + OpenAPI (springdoc). Idempotent order creation via an <code>Idempotency-Key</code> header.</li>
+        <li><b>Stretch (months 4 to 5):</b> Kafka event on each state change, Redis cache for the catalog, JWT auth, CI with GitHub Actions.</li>
+      </ul>
+      <div class="flow">
+        <span class="node">Mobile / Web</span><span class="arrow">→</span>
+        <span class="node em">OMS API</span><span class="arrow">→</span>
+        <span class="node">PostgreSQL</span>
+        <span class="arrow">·</span>
+        <span class="node em">OMS API</span><span class="arrow">→</span>
+        <span class="node">Kafka</span><span class="arrow">→</span>
+        <span class="node">Provisioning Worker</span>
+      </div>
+    </div>
+  </details>
+
+  <details class="topic">
+    <summary>Entities &amp; relationships</summary>
+    <div class="body">
+      <table>
+        <tr><th>Entity</th><th>Key fields</th><th>Relationships</th></tr>
+        <tr><td><b>Subscriber</b></td><td>id, msisdn (unique), fullName, email, status, createdAt</td><td>1 : N → ServiceOrder</td></tr>
+        <tr><td><b>ServiceCatalog</b></td><td>id, code (unique), name, type (PLAN/ADDON/SIM), monthlyPrice, active</td><td>1 : N → ServiceOrder</td></tr>
+        <tr><td><b>ServiceOrder</b></td><td>id, status, requestedAt, updatedAt, failureReason, version</td><td>N : 1 → Subscriber, N : 1 → ServiceCatalog</td></tr>
+      </table>
+      <div class="code"><span class="lang">sql</span><pre><code>CREATE TABLE subscriber (
+  id BIGSERIAL PRIMARY KEY, msisdn VARCHAR(15) NOT NULL UNIQUE,
+  full_name VARCHAR(255) NOT NULL, email VARCHAR(255), status VARCHAR(20) NOT NULL,
+  created_at TIMESTAMPTZ NOT NULL DEFAULT now());
+
+CREATE TABLE service_catalog (
+  id BIGSERIAL PRIMARY KEY, code VARCHAR(40) NOT NULL UNIQUE, name VARCHAR(120) NOT NULL,
+  type VARCHAR(20) NOT NULL, monthly_price NUMERIC(10,2) NOT NULL, active BOOLEAN NOT NULL DEFAULT true);
+
+CREATE TABLE service_order (
+  id BIGSERIAL PRIMARY KEY,
+  subscriber_id BIGINT NOT NULL REFERENCES subscriber(id),
+  catalog_id    BIGINT NOT NULL REFERENCES service_catalog(id),
+  status VARCHAR(20) NOT NULL, failure_reason TEXT,
+  requested_at TIMESTAMPTZ NOT NULL DEFAULT now(), updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
+  version BIGINT NOT NULL DEFAULT 0);
+CREATE INDEX idx_order_subscriber ON service_order(subscriber_id);
+CREATE INDEX idx_order_status ON service_order(status);</code></pre></div>
+    </div>
+  </details>
+
+  <details class="topic">
+    <summary>Order State Machine: PENDING → PROVISIONING → ACTIVE</summary>
+    <div class="body">
+      <div class="flow">
+        <span class="node">PENDING</span><span class="arrow">→</span>
+        <span class="node">PROVISIONING</span><span class="arrow">→</span>
+        <span class="node em">ACTIVE</span>
+      </div>
+      <div class="flow">
+        <span class="node">PENDING</span><span class="arrow">→</span><span class="node bad">CANCELLED</span>
+        <span class="arrow">·</span>
+        <span class="node">PROVISIONING</span><span class="arrow">→</span><span class="node bad">FAILED</span>
+        <span class="arrow">·</span>
+        <span class="node">ACTIVE</span><span class="arrow">→</span><span class="node bad">TERMINATED</span>
+      </div>
+      <table>
+        <tr><th>From</th><th>To</th><th>Trigger</th></tr>
+        <tr><td>PENDING</td><td>PROVISIONING</td><td>Validation passed, request sent to the network/provisioning system</td></tr>
+        <tr><td>PROVISIONING</td><td>ACTIVE</td><td>Provisioning callback confirms success</td></tr>
+        <tr><td>PROVISIONING</td><td>FAILED</td><td>Provisioning error or timeout (can be retried → PROVISIONING)</td></tr>
+        <tr><td>PENDING</td><td>CANCELLED</td><td>Customer cancels before provisioning starts</td></tr>
+        <tr><td>ACTIVE</td><td>TERMINATED</td><td>Customer or system ends the service</td></tr>
+      </table>
+      <p>Put the rules <b>inside the enum</b>, so illegal transitions are impossible by construction:</p>
+      <div class="code"><span class="lang">java</span><pre><code>public enum OrderStatus {
+    PENDING, PROVISIONING, ACTIVE, FAILED, CANCELLED, TERMINATED;
+
+    private static final Map&lt;OrderStatus, Set&lt;OrderStatus&gt;&gt; ALLOWED = Map.of(
+        PENDING,      Set.of(PROVISIONING, CANCELLED),
+        PROVISIONING, Set.of(ACTIVE, FAILED),
+        FAILED,       Set.of(PROVISIONING),
+        ACTIVE,       Set.of(TERMINATED),
+        CANCELLED,    Set.of(),
+        TERMINATED,   Set.of());
+
+    public boolean canMoveTo(OrderStatus next) { return ALLOWED.get(this).contains(next); }
+}
+
+@Entity
+public class ServiceOrder {
+    @Enumerated(EnumType.STRING) private OrderStatus status = OrderStatus.PENDING;
+    @Version private long version;                    // blocks lost updates from concurrent callbacks
+
+    public void transitionTo(OrderStatus next) {
+        if (!status.canMoveTo(next))
+            throw new IllegalStateException(status + " -&gt; " + next + " is not allowed");
+        this.status = next;
+    }
+}
+
+@Transactional
+public void onProvisioningSuccess(Long orderId) {
+    ServiceOrder o = repo.findById(orderId).orElseThrow();
+    o.transitionTo(OrderStatus.ACTIVE);               // dirty checking issues the UPDATE
+}</code></pre></div>
+      <div class="goal"><b>Senior-level touches:</b> optimistic locking (<code>@Version</code>), idempotent callbacks (a repeated "success" must not fail), an audit table for status history, and an outbox table feeding Kafka events.</div>
+    </div>
+  </details>
+
+  <details class="topic">
+    <summary>Suggested REST endpoints</summary>
+    <div class="body">
+      <table>
+        <tr><th>Method</th><th>Path</th><th>Purpose</th></tr>
+        <tr><td>POST</td><td>/api/v1/subscribers</td><td>Register a subscriber</td></tr>
+        <tr><td>GET</td><td>/api/v1/catalog?type=PLAN</td><td>Browse active services (cache this)</td></tr>
+        <tr><td>POST</td><td>/api/v1/orders</td><td>Create an order (PENDING)</td></tr>
+        <tr><td>GET</td><td>/api/v1/orders/{id}</td><td>Order detail + status</td></tr>
+        <tr><td>GET</td><td>/api/v1/subscribers/{id}/orders?page=0&amp;size=20</td><td>Paginated order history</td></tr>
+        <tr><td>POST</td><td>/api/v1/orders/{id}/cancel</td><td>Cancel while PENDING</td></tr>
+        <tr><td>POST</td><td>/internal/orders/{id}/provisioning-result</td><td>Callback from the provisioning system</td></tr>
+      </table>
+    </div>
+  </details>
+</section>
+
+<!-- ============ SECTION 5 ============ -->
+<section id="interview">
+  <div class="eyebrow">Section 5</div>
+  <h2>Senior Engineer Interview Prep</h2>
+
+  <details class="topic" open>
+    <summary>Top 10 Java / Spring Boot questions</summary>
+    <div class="body">
+      <h3>1. What is Dependency Injection and why use it?</h3>
+      <p>Objects receive their dependencies instead of creating them. It decouples classes from concrete implementations, which makes code easier to test (swap in mocks) and change. Prefer constructor injection: dependencies are final and required.</p>
+      <h3>2. How does HashMap work internally?</h3>
+      <p>An array of buckets. The key's <code>hashCode()</code> picks a bucket, <code>equals()</code> resolves collisions inside it. Collisions form a linked list that treeifies into a red-black tree at 8 entries (Java 8+). Default load factor 0.75: when exceeded, the table doubles and rehashes. Average O(1), worst case O(log n).</p>
+      <h3>3. <code>==</code> vs <code>equals()</code>, and the hashCode contract?</h3>
+      <p><code>==</code> compares references; <code>equals()</code> compares logical equality. If two objects are equal they <b>must</b> return the same <code>hashCode()</code>. Break this and HashMap/HashSet misbehave. Records generate both correctly.</p>
+      <h3>4. How does Spring Boot auto-configuration work?</h3>
+      <p><code>@EnableAutoConfiguration</code> loads candidate configuration classes listed in <code>META-INF/spring/...AutoConfiguration.imports</code> from starters on the classpath. Each is guarded by conditions (<code>@ConditionalOnClass</code>, <code>@ConditionalOnMissingBean</code>), so it only applies when relevant and backs off when you define your own bean.</p>
+      <h3>5. <code>@Component</code> vs <code>@Bean</code>?</h3>
+      <p><code>@Component</code> (and <code>@Service</code>, <code>@Repository</code>) marks <i>your</i> class for classpath scanning. <code>@Bean</code> is a method in a <code>@Configuration</code> class that returns an object, and is used for third-party classes or when you need custom construction.</p>
+      <h3>6. How does <code>@Transactional</code> work and what are the pitfalls?</h3>
+      <p>A proxy wraps the bean, opens a transaction before the method and commits or rolls back after. Pitfalls: self-invocation bypasses the proxy; only public methods through the proxy are covered; checked exceptions don't roll back by default; a long transaction holds a connection. Know propagation (<code>REQUIRED</code>, <code>REQUIRES_NEW</code>) and isolation basics.</p>
+      <h3>7. What is the N+1 problem and how do you fix it?</h3>
+      <p>One query loads N parents, then lazy access fires one extra query per parent. Fix with <code>JOIN FETCH</code>, <code>@EntityGraph</code>, batch fetching (<code>@BatchSize</code>), or a DTO projection. Detect it by logging SQL in tests.</p>
+      <h3>8. <code>map()</code> vs <code>flatMap()</code> in streams?</h3>
+      <p><code>map</code> transforms each element 1:1. <code>flatMap</code> maps each element to a stream and flattens the results into one stream (1:N). Same distinction on <code>Optional</code>.</p>
+      <h3>9. <code>HashMap</code> vs <code>ConcurrentHashMap</code>, and thread-safety basics?</h3>
+      <p>HashMap is not thread-safe. ConcurrentHashMap allows safe concurrent access with fine-grained locking/CAS and atomic operations like <code>computeIfAbsent</code>. Know <code>synchronized</code> vs <code>ReentrantLock</code>, <code>volatile</code> (visibility, not atomicity), thread pools via <code>ExecutorService</code>, and that virtual threads (Java 21) suit blocking I/O.</p>
+      <h3>10. PUT vs PATCH vs POST, and what is idempotency?</h3>
+      <p>PUT replaces a resource (idempotent). PATCH partially updates it. POST creates or triggers actions (not idempotent by default). Idempotent means repeating the call has the same effect as once. Make POSTs safe to retry with an idempotency key, which matters a lot for payments and orders.</p>
+      <div class="goal"><b>Also be ready for:</b> JVM memory (heap, stack, metaspace) and garbage collection basics, SOLID, checked vs unchecked exceptions, bean scopes, <code>@Async</code>, DB indexing and isolation levels, and Spring Security/JWT basics.</div>
+    </div>
+  </details>
+
+  <details class="topic">
+    <summary>System design basics</summary>
+    <div class="body">
+      <h3>Monolith vs Microservices</h3>
+      <table>
+        <tr><th></th><th>Monolith</th><th>Microservices</th></tr>
+        <tr><td>Deploy</td><td>One unit, simple</td><td>Independent per service, but more pipelines</td></tr>
+        <tr><td>Scaling</td><td>Scale everything together</td><td>Scale hot services only</td></tr>
+        <tr><td>Data</td><td>One DB, ACID transactions</td><td>DB per service, eventual consistency, sagas</td></tr>
+        <tr><td>Complexity</td><td>Low early on</td><td>Network failures, tracing, versioning, ops overhead</td></tr>
+        <tr><td>Best for</td><td>Small teams, new products (a <b>modular monolith</b> is a strong default)</td><td>Large orgs, clear domain boundaries</td></tr>
+      </table>
+      <h3>Caching</h3>
+      <ul>
+        <li><b>Cache-aside:</b> read cache first; on a miss read the DB and populate the cache. Most common.</li>
+        <li>Use for read-heavy, rarely-changing data (service catalog). Set a TTL; invalidate on write.</li>
+        <li>Tools: Redis (distributed), Caffeine (in-process). In Spring: <code>@EnableCaching</code> + <code>@Cacheable</code>/<code>@CacheEvict</code>.</li>
+        <li>Hard parts: stale data, cache stampede, and deciding what <i>not</i> to cache.</li>
+      </ul>
+      <div class="code"><span class="lang">java</span><pre><code>@Cacheable(value = "catalog", key = "#code")
+public ServiceCatalog findByCode(String code) { return repo.findByCode(code).orElseThrow(); }
+
+@CacheEvict(value = "catalog", key = "#c.code")
+public void update(ServiceCatalog c) { repo.save(c); }</code></pre></div>
+      <h3>Message queues</h3>
+      <ul>
+        <li><b>Why:</b> decouple services, absorb traffic spikes, retry failures, process asynchronously.</li>
+        <li><b>Kafka:</b> distributed log, high throughput, replayable, partition-ordered. Good for event streams.</li>
+        <li><b>RabbitMQ:</b> classic broker with routing and acks. Good for task queues.</li>
+        <li><b>Must know:</b> at-least-once delivery means consumers must be <b>idempotent</b>. Use a dead-letter queue for poison messages, and the <b>outbox pattern</b> to publish events reliably with a DB write.</li>
+      </ul>
+      <h3>Other building blocks</h3>
+      <ul>
+        <li>Load balancer + stateless services (keep session state out of the app).</li>
+        <li>DB: indexes, read replicas, pagination, connection pooling (HikariCP).</li>
+        <li>Resilience: timeouts, retries with backoff, circuit breaker (Resilience4j), rate limiting.</li>
+        <li>Observability: structured logs, metrics (Micrometer/Prometheus), distributed tracing.</li>
+      </ul>
+      <div class="goal"><b>Interview framework:</b> clarify requirements → estimate scale → sketch API + data model → draw the high-level design → deep-dive one bottleneck → discuss trade-offs. Say your trade-offs out loud.</div>
+    </div>
+  </details>
+
+  <details class="topic">
+    <summary>Framing your mobile experience as a backend advantage</summary>
+    <div class="body">
+      <ul>
+        <li><b>You are the API's customer.</b> You know what a painful API looks like: chatty endpoints, inconsistent errors, no pagination, breaking changes. Say: "I design APIs from the consumer's point of view."</li>
+        <li><b>Real-world constraints:</b> flaky networks, retries, offline sync, and battery taught you idempotency, timeouts, and graceful degradation, the same topics as resilient backends.</li>
+        <li><b>Versioning pain:</b> old app versions live for months. That is a first-hand case for backward-compatible changes and API versioning.</li>
+        <li><b>Payload discipline:</b> you have fought large responses, so you naturally design lean DTOs, pagination, and caching headers (ETag).</li>
+        <li><b>End-to-end ownership:</b> auth flows (OAuth/JWT), push notifications, crash analytics, and release pipelines are transferable to backend CI/CD and observability.</li>
+        <li><b>Concurrency mindset:</b> async/await, coroutines, and main-thread rules map directly to thread pools, futures, and non-blocking I/O.</li>
+      </ul>
+      <p><b>Sample pitch:</b> "I spent 4 years on the client side of distributed systems. I've felt every backend design decision as a consumer. Now I'm building the other half, and my Telecom OMS project shows it: idempotent order creation, a state machine, Kafka events, and a clean API."</p>
+      <h3>Final-month checklist</h3>
+      <ul>
+        <li>Polished GitHub repo with README, architecture diagram, and tests.</li>
+        <li>Resume headline: "Senior Software Engineer (Flutter + Java/Spring Boot), 4+ yrs shipping production apps and APIs." Be honest about years: say 4 years total, not 4 years of Java.</li>
+        <li>2 mock interviews per week; practice explaining every line of your project.</li>
+        <li>Daily DSA habit (arrays, hashmaps, two pointers, trees); aim for ~100 solved problems before applying.</li>
+      </ul>
+    </div>
+  </details>
+</section>
+
+<!-- ============ SECTION 6 ============ -->
+<section id="salary">
+  <div class="eyebrow">Section 6</div>
+  <h2>Salary &amp; Switch Strategy (from 10 LPA)</h2>
+  <p>You are at <b>10 LPA</b> with 4 years of experience. The numbers below mix published market data with my own estimates, so treat them as ranges to test against real offers, not promises.</p>
+
+  <details class="topic" open>
+    <summary>What the market data says <span class="badge">DATA</span></summary>
+    <div class="body">
+      <table>
+        <tr><th>Role / source</th><th>Reported range (India)</th></tr>
+        <tr><td>Senior Java backend developer (Glassdoor, 22 reports)</td><td>Avg ~11 LPA, range 6.4 to 14.5 LPA</td></tr>
+        <tr><td>Java backend developer, all levels (Glassdoor, ~90 reports)</td><td>Avg ~5.5 LPA, top ~9.5 LPA</td></tr>
+        <tr><td>Flutter developer, India median (Flexiple)</td><td>~8 LPA; Bengaluru median ~13 LPA</td></tr>
+        <tr><td>Senior Flutter (6+ yrs, Flexiple)</td><td>Median ~17 LPA</td></tr>
+      </table>
+      <div class="analogy"><b>Read this carefully:</b> Glassdoor's Java figures are self-reported and skew toward junior and service-company staff, so they understate what product companies and global capability centers pay. Also note that senior Flutter pay is already competitive. Switching to Java does not automatically raise your salary; it widens your options and your long-term ceiling.</div>
+    </div>
+  </details>
+
+  <details class="topic">
+    <summary>Realistic offer targets <span class="badge">ESTIMATE</span></summary>
+    <div class="body">
+      <p>These are my estimates for someone moving from 10 LPA with 4 years of experience and new Java skills. They are not sourced figures.</p>
+      <table>
+        <tr><th>Scenario</th><th>Target CTC</th><th>What it takes</th></tr>
+        <tr><td><b>Floor</b>: service / mid-size firm, you are seen as a Java beginner</td><td>11 to 13 LPA</td><td>Core Java + Spring Boot basics, one decent project</td></tr>
+        <tr><td><b>Likely</b>: GCC or product-leaning company, hired as mid-level</td><td>14 to 18 LPA</td><td>OMS project with Kafka, Docker, tests, CI; solid Java and SQL interviews</td></tr>
+        <tr><td><b>Stretch</b>: strong product company or GCC</td><td>18 to 24 LPA</td><td>Good DSA, system design rounds, referrals, a competing offer</td></tr>
+      </table>
+      <div class="goal"><b>Plan on "Likely".</b> A 40 to 80% hike is a stretch when you also change stacks. Aim for 14 to 18 LPA in the first move, then grow faster once you have 1 to 2 years of Java in production.</div>
+    </div>
+  </details>
+
+  <details class="topic">
+    <summary>Two routes: choose before Month 4 <span class="badge">DECISION</span></summary>
+    <div class="body">
+      <table>
+        <tr><th></th><th>Route A: full switch to Java backend</th><th>Route B: hybrid (Flutter + Java backend)</th></tr>
+        <tr><td>Roles</td><td>Backend / platform engineer</td><td>Full-stack mobile, "Flutter + Spring Boot" product roles</td></tr>
+        <tr><td>Pay on entry</td><td>Flat to modest hike, possible dip at some firms</td><td>Closer to senior Flutter pay, since Flutter is still your paid skill</td></tr>
+        <tr><td>Risk</td><td>Seen as "Java with no Java years"</td><td>Less pure-backend depth at first</td></tr>
+        <tr><td>Best when</td><td>You want backend as a long-term career</td><td>You want to protect pay while building Java experience</td></tr>
+      </table>
+      <p><b>Practical tip:</b> ask your current employer for a backend task or a service your app depends on. Even a few months of real Spring Boot work at your company beats any course, and it turns "Java beginner" into "Java in production".</p>
+    </div>
+  </details>
+
+  <details class="topic">
+    <summary>Timeline with salary checkpoints</summary>
+    <div class="body">
+      <table>
+        <tr><th>When</th><th>Milestone</th><th>Salary action</th></tr>
+        <tr><td>Months 1 to 2</td><td>Core Java + Spring Boot + SQL</td><td>None yet. Do not apply before you can build a REST API alone.</td></tr>
+        <tr><td>Month 3</td><td>Security, transactions, Redis, Kafka basics</td><td>Look for internal backend work at your company</td></tr>
+        <tr><td>Months 4 to 5</td><td>OMS project deployed, system design practice</td><td><b>Start applying</b> to 10 to 15 roles; collect real offer numbers</td></tr>
+        <tr><td>Month 6</td><td>Mock interviews, DSA</td><td>Negotiate with 2 or more offers in hand</td></tr>
+      </table>
+    </div>
+  </details>
+
+  <details class="topic">
+    <summary>Negotiation checklist</summary>
+    <div class="body">
+      <ul>
+        <li>Compare <b>fixed CTC</b>, variable pay, joining bonus and in-hand salary, not just the headline number.</li>
+        <li>Share a target range rather than your current 10 LPA. If you must state it, state it factually and pair it with the value you bring.</li>
+        <li>Ask about notice period buy-out, since a 60 to 90 day notice can shape your timing.</li>
+        <li>Prefer roles where you will actually write Java from day one, even at the same pay: the experience compounds.</li>
+        <li>Keep one Flutter-based offer as a fallback; it strengthens your position in Java negotiations.</li>
+      </ul>
+    </div>
+  </details>
+</section>
+
+<footer>Built for focused study. Progress is saved in your browser's local storage. Say "continue" if you want more depth on Docker/Kubernetes, Spring Security, Kafka, or a week-by-week plan.</footer>
+</main>
+
+<script>
+/* ---------- Roadmap data ---------- */
+const MONTHS = [
+ {t:"Month 1 · Core Java", goal:"Write fluent modern Java and understand how the JVM works.", weeks:[
+  ["OOP in Java: classes, interfaces, inheritance, generics, access modifiers","Set up JDK 21, IntelliJ, Maven, Git","Solve 15 easy problems in Java"],
+  ["Collections: List, Set, Map internals (ArrayList, HashMap, TreeMap)","equals / hashCode, Comparable vs Comparator","Exceptions: checked vs unchecked, try-with-resources"],
+  ["Java 8+: lambdas, streams, Optional, records","Immutability, enums, text blocks, switch expressions","Refactor earlier code to streams"],
+  ["Concurrency: Thread, ExecutorService, CompletableFuture, synchronized","JVM basics: heap, stack, GC overview","Build a mini console app with tests (JUnit 5)"]]},
+ {t:"Month 2 · Spring Boot & Data", goal:"Build a working REST API backed by a real database.", weeks:[
+  ["SQL fundamentals: joins, GROUP BY, indexes, transactions (PostgreSQL)","Spring Boot starter project, IoC/DI, bean lifecycle","REST principles and HTTP status codes"],
+  ["@RestController, DTOs, validation (@Valid), global exception handling","Spring Data JPA: entities, repositories, derived queries","Flyway migrations"],
+  ["Relationships: @OneToMany/@ManyToOne, LAZY vs EAGER, N+1 fixes","Pagination and sorting","Start Telecom OMS: Subscriber + Catalog CRUD"],
+  ["Unit tests (Mockito) and slice tests (@WebMvcTest, @DataJpaTest)","OpenAPI docs with springdoc","Finish OMS v1: orders + state machine"]]},
+ {t:"Month 3 · Advanced Backend", goal:"Make the service secure, fast, and production-shaped.", weeks:[
+  ["Spring Security: authentication vs authorization, JWT","Role-based access on endpoints","Password hashing (BCrypt)"],
+  ["@Transactional deep dive: propagation, isolation, rollback rules","Optimistic locking with @Version","Idempotency keys for order creation"],
+  ["Caching with Redis and @Cacheable","Async processing: @Async, scheduling","Integration tests with Testcontainers"],
+  ["Messaging: Kafka basics (topics, partitions, consumer groups)","Publish order events; outbox pattern intro","Logging, Actuator, Micrometer metrics"]]},
+ {t:"Month 4 · System Design", goal:"Reason about architecture and trade-offs out loud.", weeks:[
+  ["Monolith vs microservices; modular monolith","API design: versioning, pagination, error contracts","Read: HTTP caching, REST maturity"],
+  ["Scalability: load balancing, stateless services, replicas, sharding basics","CAP theorem, consistency models","Design: URL shortener"],
+  ["Resilience: timeouts, retries, circuit breaker (Resilience4j), rate limiting","Sagas and distributed transactions","Design: order management system"],
+  ["Observability: tracing, structured logs","DB tuning: EXPLAIN, indexes, connection pools","Design: notification service; write up your OMS architecture"]]},
+ {t:"Month 5 · DevOps & Cloud", goal:"Ship and run what you build.", weeks:[
+  ["Linux and shell essentials","Dockerize the OMS (multi-stage build)","Docker Compose: app + Postgres + Redis + Kafka"],
+  ["CI/CD with GitHub Actions: build, test, image push","Environment config and secrets","12-factor app principles"],
+  ["Cloud basics on AWS: EC2, RDS, S3, IAM","Deploy OMS to a cloud VM or managed service","Health checks and rollback strategy"],
+  ["Kubernetes fundamentals: pods, deployments, services","Monitoring with Prometheus + Grafana","Polish the repo: README, diagrams, tests passing in CI"]]},
+ {t:"Month 6 · Interview Prep", goal:"Convert skills into offers.", weeks:[
+  ["DSA: arrays, strings, hashmaps, two pointers (20 problems)","Review the Top 10 Java/Spring questions","Update resume and LinkedIn"],
+  ["DSA: trees, graphs, recursion, binary search (20 problems)","Practice 3 system design prompts","Mock interview #1 and #2"],
+  ["Behavioral stories (STAR) incl. mobile to backend narrative","Apply to 15+ roles (start from Month 4 to 5, not Month 6); ask for referrals","Mock interview #3 and #4"],
+  ["Targeted gap-filling from interview feedback","Negotiation prep: target 14 to 18 LPA (stretch 20+), see Section 6","Keep applying; 2 interviews per week"]]}
+];
+
+/* ---------- Render roadmap ---------- */
+(function(){
+  const root=document.getElementById('roadmap-root'); let n=0, wk=0;
+  MONTHS.forEach((m,mi)=>{
+    const d=document.createElement('details'); if(mi===0) d.open=true;
+    let html=`<summary>${m.t}<span class="badge">4 WEEKS</span></summary><div class="body"><div class="goal"><b>Goal:</b> ${m.goal}</div>`;
+    m.weeks.forEach(w=>{ wk++;
+      html+=`<div class="week">Week ${wk}</div>`;
+      w.forEach(item=>{ html+=`<label class="chk"><input type="checkbox" data-id="r${n++}"><span>${item}</span></label>`; });
+    });
+    d.innerHTML=html+'</div>'; root.appendChild(d);
+  });
+})();
+
+/* ---------- Topic "mark as studied" checkboxes ---------- */
+document.querySelectorAll('details.topic').forEach((d,i)=>{
+  const row=document.createElement('div'); row.className='done-row';
+  row.innerHTML=`<label class="chk"><input type="checkbox" data-id="t${i}"><span>Mark this topic as studied</span></label>`;
+  d.querySelector('.body').appendChild(row);
+});
+
+/* ---------- Code blocks: copy buttons ---------- */
+document.querySelectorAll('.code').forEach(c=>{
+  const b=document.createElement('button'); b.className='copy'; b.type='button'; b.textContent='Copy';
+  b.addEventListener('click',async()=>{
+    const text=c.querySelector('pre').innerText;
+    try{ await navigator.clipboard.writeText(text); }
+    catch(e){ const ta=document.createElement('textarea'); ta.value=text; document.body.appendChild(ta); ta.select(); try{document.execCommand('copy');}catch(_){} ta.remove(); }
+    b.textContent='Copied!'; b.classList.add('ok');
+    setTimeout(()=>{b.textContent='Copy'; b.classList.remove('ok');},1500);
+  });
+  c.appendChild(b);
+});
+
+/* ---------- Progress + persistence ---------- */
+const KEY='java-backend-dashboard-v1';
+let saved={}; try{ saved=JSON.parse(localStorage.getItem(KEY)||'{}'); }catch(e){}
+const boxes=[...document.querySelectorAll('input[type=checkbox][data-id]')];
+function update(){
+  const done=boxes.filter(b=>b.checked).length, p=boxes.length?Math.round(done/boxes.length*100):0;
+  document.getElementById('progress-bar').style.width=p+'%';
+  document.getElementById('pct').textContent=p+'%';
+  document.getElementById('count').textContent=done+'/'+boxes.length;
+}
+boxes.forEach(b=>{
+  if(saved[b.dataset.id]) b.checked=true;
+  b.addEventListener('change',()=>{
+    saved[b.dataset.id]=b.checked;
+    try{ localStorage.setItem(KEY,JSON.stringify(saved)); }catch(e){}
+    update();
+  });
+});
+update();
+
+/* ---------- Sidebar (mobile) + scrollspy ---------- */
+const sb=document.getElementById('sidebar');
+document.getElementById('menu').addEventListener('click',()=>sb.classList.toggle('open'));
+sb.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>sb.classList.remove('open')));
+const links=[...sb.querySelectorAll('nav a')];
+const spy=new IntersectionObserver(es=>{
+  es.forEach(e=>{ if(e.isIntersecting){
+    links.forEach(l=>l.classList.toggle('active', l.getAttribute('href')==='#'+e.target.id));
+  }});
+},{rootMargin:'-30% 0px -60% 0px'});
+document.querySelectorAll('main > section, main#top').forEach(s=>s.id&&spy.observe(s));
+</script>
+</body>
+</html>
