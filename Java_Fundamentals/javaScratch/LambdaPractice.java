@@ -1,16 +1,24 @@
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 public class LambdaPractice {
     public static void main(String[] args) {
+        List<String> statuses = List.of(
+                "PENDING", "COMPLETED", "PENDING",
+                "CANCELLED", "COMPLETED");
+        Map<String, Long> counts = statuses.stream()
+                .collect(Collectors.groupingBy(
+                        status -> status,
+                        Collectors.counting()));
+        System.out.println(counts);
+        List<String> departments = List.of(
+                "IT", "HR", "IT", "FINANCE", "HR", "IT");
 
-        List<Integer> amounts = List.of(500, 1500, 500, 2500, 1500, 3000);
-        amounts.stream()
-                .distinct()
-                .filter(amount -> amount >= 1500)
-                .sorted()
-                .collect(Collectors.toList())
-                .forEach(amount -> System.out.println(amount));
-
+        Map<String, Long> departmentsCount = departments.stream()
+                .collect(Collectors.groupingBy(
+                        department -> department,
+                        Collectors.counting()));
+        System.out.println("departments count : " + departmentsCount);
     }
 }
